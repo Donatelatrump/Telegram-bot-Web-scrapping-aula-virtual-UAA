@@ -47,8 +47,8 @@ const string path_datosOrICI2 = "E:\\Codigosd\\Aula bot\\DatosOrICI2.txt";
 const string path_datosOrTempICI2 = "E:\\Codigosd\\Aula bot\\DatosOrTempICI2.txt";
 string fechota = "";
 //Variables de acceso a la pagina de la Uni
-string usuarioICI = "al283189",usuarioLDI = "al263887",usuarioICI2= "al261731";
-string contrasenaICI = "Donnet0708", contrasenaLDI= "Wera060102",contrasenaICI2 = "SPjl3490";
+string usuarioICI = "----",usuarioLDI = "----",usuarioICI2= "-----";
+string contrasenaICI = "-----", contrasenaLDI= "-----",contrasenaICI2 = "------";
 char[] fechita = new char[2];
 char[] numeros = new char[50];
 char[] FECHa = new char[3];
