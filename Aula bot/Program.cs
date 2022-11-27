@@ -55,7 +55,7 @@ char[] FECHa = new char[3];
 char[] fecha = new char[2];
 bool bandera = false, veces = false, verdad = false,minecraft,LDI = false, altiro =false;
 //Declaracion de los objetos del bot 
-var bot = new BotClient("5681430643:AAGs0-yVSMuFnjix8YCzEqOg29JZlqy1W98");
+var bot = new BotClient("Yout Token");
 var updates = bot.GetUpdates();
 //Funcion para detectar programas activos en windows
 void revisar_minecraft_activo()
