@@ -5728,19 +5728,19 @@
   },
   "packageFolders": {
     "C:\\Users\\donne\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "E:\\Idles\\Sdk del visual studio feo\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Codigosd\\Aula bot\\PerreVergueBot.csproj",
+      "projectUniqueName": "C:\\Users\\donne\\Source\\Repos\\Donatelatrump\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula bot\\PerreVergueBot.csproj",
       "projectName": "PerreVergueBot",
-      "projectPath": "E:\\Codigosd\\Aula bot\\PerreVergueBot.csproj",
+      "projectPath": "C:\\Users\\donne\\Source\\Repos\\Donatelatrump\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula bot\\PerreVergueBot.csproj",
       "packagesPath": "C:\\Users\\donne\\.nuget\\packages\\",
-      "outputPath": "E:\\Codigosd\\Aula bot\\obj\\",
+      "outputPath": "C:\\Users\\donne\\Source\\Repos\\Donatelatrump\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula bot\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "E:\\Idles\\Sdk del visual studio feo\\NuGetPackages"
       ],
       "configFilePaths": [
         "C:\\Users\\donne\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5752,6 +5752,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -5811,7 +5812,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

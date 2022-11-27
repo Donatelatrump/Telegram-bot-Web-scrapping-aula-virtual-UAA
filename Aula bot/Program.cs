@@ -395,13 +395,11 @@ bool revision(string lolo, string chavo)
 void direccion_ip()
 {
     //hace webscraping por consola hacia un sitio que marca la ip del equipo
-    HtmlWeb oWeb = new();
-    HtmlDocument doc = oWeb.Load("https://cual-es-mi-ip-publica.com");
-    foreach (var Node in doc.DocumentNode.CssSelect(".rojo"))
-    {
-        var NodoAncho = Node.CssSelect("strong").First();
-        texto = NodoAncho.InnerHtml;
-    }
+    IWebDriver driver = new ChromeDriver();
+    driver.Manage().Window.Minimize();
+    driver.Navigate().GoToUrl("https://cual-es-mi-ip-publica.com");
+    var ip = driver.FindElement(By.XPath("/html/body/main/div[1]/span[2]/strong"));
+    texto = ip.Text;
     //lee el archivo de ip que ya teniamos 
     StreamReader ipes234 = File.OpenText(path_ip);
     if (ipes234 != null)
