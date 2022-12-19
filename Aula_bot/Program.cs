@@ -28,7 +28,7 @@ using OpenQA.Selenium.DevTools.V106.Debugger;
 
 //Declaracion de variables necesarias, (es posible rutilizar variables )
 int contador_temporal = 0, contador_original = 0, contador2 = 0, contadores = 0, contadorcito = 0, supercontador = 0, saberes = 0, contador_uni = 0, ultracontador=0,megacontador =0,conta=0;
-string texto2="",lineas, temporal, aveces = "", cmp = "", tareas_diferencias = "", texto = "", fechas_aula, fechas_aula2 = "", eventos_aula, fechaderemplazo = "", Admins = "", texto22 = "", fecha_actual = "";
+string texto2="",lineas="", temporal="", aveces = "", cmp = "", tareas_diferencias = "", texto = "", fechas_aula, fechas_aula2 = "", eventos_aula, fechaderemplazo = "", Admins = "", texto22 = "", fecha_actual = "";
 //Declaracion de las rutas de los archivos que almacenan la informacion (debo encontrar una mejor manera de guardarlo, una manera mas eficiente)
 const string path_tareas = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\Eventos.txt";
 const string path_ip = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\ips2.txt";
@@ -293,12 +293,12 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         {
             for (int j = 0; j < contador2; j++)
             {
-#pragma warning disable CS8600 // Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
-                temporal = Primer_evento1.ReadLine();
-#pragma warning restore CS8600 // Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
-#pragma warning disable CS8602 // Desreferencia de una referencia posiblemente NULL.
+                var xc = "";
+                if((xc=Primer_evento1.ReadLine())!= null)
+                {
+                    temporal = xc;
+                }
                 numeros[j] = temporal[0];
-#pragma warning restore CS8602 // Desreferencia de una referencia posiblemente NULL.
             }
             Primer_evento1.Close();
         } //Ciclo de guardado de los datos ordenados tipo baraja, primero la fecha y se cuenta el numero de eventos que este tiene 
@@ -309,17 +309,20 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         StreamWriter aiuda = new(path);
         for (int i = 0; i < contador2; i++)
         {
-#pragma warning disable CS8600 // Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
-            lineas = Primer_evento.ReadLine();
-#pragma warning restore CS8600 // Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
-
+            var ase = "";
+            if ((ase = Primer_evento.ReadLine()) != null)
+            {
+                lineas = ase;
+            }
             aiuda.WriteLine(lineas);
             int integer = numeros[i] - '0';
             for (int j = 0; j < integer; j++)
             {
-#pragma warning disable CS8600 // Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
-                aveces = lolcito.ReadLine();
-#pragma warning restore CS8600 // Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
+                var lo = "";
+                if ((lo = lolcito.ReadLine()) != null)
+                {
+                    aveces = lo;
+                }
                 aiuda.WriteLine(aveces);
             }
             contadores += contador2;
@@ -399,9 +402,11 @@ bool revision(string lolo, string chavo,string update)
         StreamReader aioch = File.OpenText(chavo);
         for (int j = 0; j < contador_temporal; j++)
         {
-#pragma warning disable CS8600 // Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
-            tareas_diferencias = aioch.ReadLine();
-#pragma warning restore CS8600 // Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
+            var gf = "";
+            if ((gf = aioch.ReadLine()) != null)
+            {
+                tareas_diferencias += gf;
+            }
         }
         aioch.Close();
 
@@ -431,15 +436,15 @@ void direccion_ip()
     }
     //lee el archivo de ip que ya teniamos 
     StreamReader ipes234 = File.OpenText(path_ip);
-    if (ipes234 != null)
+    if (ipes234.ToString() != null)
     {
-#pragma warning disable CS8600 // Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
-        aveces = ipes234.ReadLine();
-#pragma warning restore CS8600 // Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
+        var jh = "";
+        if ((jh = ipes234.ReadLine()) != null)
+        {
+            aveces = jh;
+        }
     }
-#pragma warning disable CS8602 // Desreferencia de una referencia posiblemente NULL.
     ipes234.Close();
-#pragma warning restore CS8602 // Desreferencia de una referencia posiblemente NULL.
     StreamWriter ipes = new(path_ip);
     //si la ip conseguida es diferente a la ip guardada en el archivo txt, la nueva remplaza a la vieja y el booleano se activa para mandar la nueva ip a los suscritos
     if (aveces != texto)
@@ -523,80 +528,91 @@ while (true)
     //Un contador de tiempo ya que en cada ciclo tarda 1s pues con un contador de 1 en 1 podemos contar el tiempo en segundos
     contadorcito++;
     //si el contador llega a 2 horas se hace una revision automatica
-    if (contadorcito % 7200 == 0)
+    if (contadorcito % 10 == 0)
     {
-        //se reinicia el contador para que vuelva a comenzar
-        contadorcito = 0;
-        //si al hacer la revision de aula esta detecta nuevas tareas entra en este caso
-        if (revision(path_datosOr,path_datosOrTemp,"0000") == true)
+        try
         {
-            StreamReader lectura3 = File.OpenText(path_suscritos);
-            //se leen todos los usuarios registrados y se les envia las nuevas tareas detectadas
-            while (lectura3.ToString() != null)
+            //se reinicia el contador para que vuelva a comenzar
+            contadorcito = 0;
+            //si al hacer la revision de aula esta detecta nuevas tareas entra en este caso
+            if (revision(path_datosOr, path_datosOrTemp, "0000") == true)
             {
-                var tem = "";
-                if((tem = lectura3.ReadLine())!= null){
-                    bot.SendMessage(chatId: tem, text: tareas_diferencias);
-                }
-            }
-
-            lectura3.Close();
-
-        }
-        if(revision(path_datosOrLDI,path_datosOrTempLDI,"0000") == true)
-        {
-            StreamReader lectura3 = File.OpenText(path_suscritosLDI);
-            //se leen todos los usuarios registrados y se les envia las nuevas tareas detectadas
-            while (lectura3 != null)
-            {
-#pragma warning disable CS8604 // Posible argumento de referencia nulo
-                bot.SendMessage(chatId: lectura3.ReadLine(), text: tareas_diferencias);
-#pragma warning restore CS8604 // Posible argumento de referencia nulo
-            }
-#pragma warning disable CS8602 // Desreferencia de una referencia posiblemente NULL.
-            lectura3.Close();
-#pragma warning restore CS8602 // Desreferencia de una referencia posiblemente NULL.
-        }
-        if (revision(path_datosOrICI2, path_datosOrTempICI2,"0000") ==true)
-        {
-            StreamReader lectura3 = File.OpenText(path_suscritos_ici2);
-            //se leen todos los usuarios registrados y se les envia las nuevas tareas detectadas
-            while (lectura3 != null)
-            {
-#pragma warning disable CS8604 // Posible argumento de referencia nulo
-                bot.SendMessage(chatId: lectura3.ReadLine(), text: tareas_diferencias);
-#pragma warning restore CS8604 // Posible argumento de referencia nulo
-            }
-#pragma warning disable CS8602 // Desreferencia de una referencia posiblemente NULL.
-            lectura3.Close();
-#pragma warning restore CS8602 // Desreferencia de una referencia posiblemente NULL.
-        }
-        //se revisa la direccion ip si esta es diferente a la almacenada, bandera el boleano se vuelve true 
-        direccion_ip();
-        if (bandera == true)
-        {
-            //si la ip es distinta vuelve a leer a todos los registrados y les envia la nueva ip
-            StreamReader lectura = File.OpenText(path_suscritos);
-            if (lectura != null)
-            {
-                while (lectura.ReadLine() != null)
+                StreamReader lectura3 = File.OpenText(path_suscritos);
+                //se leen todos los usuarios registrados y se les envia las nuevas tareas detectadas
+                while (lectura3.ToString() != null)
                 {
-#pragma warning disable CS8602 // Desreferencia de una referencia posiblemente NULL.
-                    bot.SendMessage(chatId: lectura.ReadLine().ToString(), text: "La direccion ip ha cambiado a: " + texto2 + ":25565");
-#pragma warning restore CS8602 // Desreferencia de una referencia posiblemente NULL.
+                    var tem = "";
+                    if ((tem = lectura3.ReadLine()) != null)
+                    {
+                        bot.SendMessage(chatId: tem, text: tareas_diferencias);
+                    }
                 }
-                lectura.Close();
+                lectura3.Close();
+            }
+            if (revision(path_datosOrLDI, path_datosOrTempLDI, "0000") == true)
+            {
+                StreamReader lectura3 = File.OpenText(path_suscritosLDI);
+                //se leen todos los usuarios registrados y se les envia las nuevas tareas detectadas
+                while (lectura3.ToString() != null)
+                {
+                    var tema = "";
+                    if ((tema = lectura3.ReadLine()) != null)
+                    {
+                        bot.SendMessage(chatId: tema, text: tareas_diferencias);
+                    }
+                }
+
+                lectura3.Close();
+            }
+            if (revision(path_datosOrICI2, path_datosOrTempICI2, "0000") == true)
+            {
+                StreamReader lectura3 = File.OpenText(path_suscritos_ici2);
+                //se leen todos los usuarios registrados y se les envia las nuevas tareas detectadas
+                while (lectura3.ToString() != null)
+                {
+                    var hg = "";
+                    if ((hg = lectura3.ReadLine()) != null)
+                    {
+                        bot.SendMessage(chatId: hg, text: tareas_diferencias);
+                    }
+                }
+
+                lectura3.Close();
+
+            }
+            //se revisa la direccion ip si esta es diferente a la almacenada, bandera el boleano se vuelve true 
+            direccion_ip();
+            if (bandera == true)
+            {
+                //si la ip es distinta vuelve a leer a todos los registrados y les envia la nueva ip
+                StreamReader lectura = File.OpenText(path_suscritos);
+                if (lectura.ToString() != null)
+                {
+                    while (lectura.ReadLine() != null)
+                    {
+                        var gh = "";
+                        if ((gh = lectura.ReadLine()) != null)
+                        {
+                            bot.SendMessage(chatId: gh, text: "La direccion ip del servidor ha cambiado a: " + texto2 + ":25565");
+                        }
+                    }
+                    lectura.Close();
+                }
+                else
+                {
+
+                    lectura.Close();
+
+                }
             }
             else
             {
-#pragma warning disable CS8602 // Desreferencia de una referencia posiblemente NULL.
-                lectura.Close();
-#pragma warning restore CS8602 // Desreferencia de una referencia posiblemente NULL.
+                Console.WriteLine("No hay cambios de Ip\n");
             }
         }
-        else
+        catch (Exception e)
         {
-            Console.WriteLine("No hay cambios de Ip\n");
+            Console.WriteLine(e);
         }
     }
     //si el contador aun no llega al tiempo de 2 horas se pasa directamente a la comprobacion de mensajes 
@@ -627,7 +643,6 @@ while (true)
                         break;
                     case "/aula_LDI":
                         bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de la captura de los datos!\n");
-
                         if (LDI != true )
                         {
                             aula(path_datosOrLDI,usuarioLDI,contrasenaLDI,path_fecha_LDI,path_tareas_LDI, update.Message.Chat.Id.ToString());
@@ -635,7 +650,7 @@ while (true)
                             megacontador = supercontador;
                         }
                         StreamReader aiuda2 = File.OpenText(path_datosOrLDI);
-                        if (aiuda2.ToString() != null)
+                        if (megacontador!=0)
                         { 
                             bot.SendMessage(update.Message.Chat.Id, "=============================\n               Tareas detectadas               \n");
 
@@ -708,7 +723,7 @@ while (true)
                         }
 
                         StreamReader aiu = File.OpenText(path_datosOrICI2);
-                        if (aiu.ToString() != null)
+                        if (conta!=0)
                         {
                             bot.SendMessage(update.Message.Chat.Id, "=============================\n               Tareas detectadas               \n");
 
@@ -783,7 +798,7 @@ while (true)
 
                         }
                         StreamReader aiuda = File.OpenText(path_datosOr);
-                        if (aiuda.ToString() != null)
+                        if (ultracontador!=0)
                         {
                             bot.SendMessage(update.Message.Chat.Id, "=============================\n               Tareas detectadas               \n");
 
