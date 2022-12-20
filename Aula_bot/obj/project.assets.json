@@ -6191,19 +6191,19 @@
   },
   "packageFolders": {
     "C:\\Users\\donne\\.nuget\\packages\\": {},
-    "E:\\Idles\\Sdk del visual studio feo\\NuGetPackages": {}
+    "D:\\Visual studio\\Componentes\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\PerreVergueBot.csproj",
+      "projectUniqueName": "D:\\Documentos\\Codigosd\\Bot_Telegram2\\Aula_bot\\PerreVergueBot.csproj",
       "projectName": "PerreVergueBot",
-      "projectPath": "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\PerreVergueBot.csproj",
+      "projectPath": "D:\\Documentos\\Codigosd\\Bot_Telegram2\\Aula_bot\\PerreVergueBot.csproj",
       "packagesPath": "C:\\Users\\donne\\.nuget\\packages\\",
-      "outputPath": "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\obj\\",
+      "outputPath": "D:\\Documentos\\Codigosd\\Bot_Telegram2\\Aula_bot\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "E:\\Idles\\Sdk del visual studio feo\\NuGetPackages"
+        "D:\\Visual studio\\Componentes\\NuGetPackages"
       ],
       "configFilePaths": [
         "C:\\Users\\donne\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6279,7 +6279,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
