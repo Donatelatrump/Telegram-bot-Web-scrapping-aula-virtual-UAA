@@ -27,26 +27,26 @@ using OpenQA.Selenium.DevTools.V106.Debugger;
 
 
 //Declaracion de variables necesarias, (es posible rutilizar variables )
-int contador_temporal = 0, contador_original = 0, contador2 = 0, contadores = 0, contadorcito = 0, supercontador = 0, saberes = 0, contador_uni = 0, ultracontador=0,megacontador =0,conta=0;
+int contador_temporal = 0, contador_original = 0, contador2 = 0, contadores = 0, contadorcito = 0, supercontador = 0, saberes = 0, contador_uni = 0, ultracontador=0,megacontador =0,conta=0,sapo=0;
 string texto2="",lineas="", temporal="", aveces = "", cmp = "", tareas_diferencias = "", texto = "", fechas_aula, fechas_aula2 = "", eventos_aula, fechaderemplazo = "", Admins = "", texto22 = "", fecha_actual = "";
 //Declaracion de las rutas de los archivos que almacenan la informacion (debo encontrar una mejor manera de guardarlo, una manera mas eficiente)
-const string path_tareas = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\Eventos.txt";
-const string path_ip = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\ips2.txt";
-const string path_fecha = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\Fechas.txt";
-const string path_suscritos = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\Suscritos2.txt";
-const string path_admins = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\Admins.txt";
-const string path_datosOr = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\DatosOr.txt";
-const string path_datosOrLDI = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\DatosOrLDI.txt";
-const string path_datosOrTemp = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\DatosOrTemp.txt";
-const string path_suscritosLDI = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\SuscritosLDI.txt";
-const string path_datosOrTempLDI = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\DatosOrTempLDI.txt";
-const string path_fecha_LDI = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\Fechas_LDI.txt";
-const string path_tareas_LDI = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\Eventos_LDI.txt";
-const string path_tareas_ici2 = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\EventosICI2.txt";
-const string path_fechas_ici2 = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\FechasICI2.txt";
-const string path_suscritos_ici2 = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\SuscritosICI2.txt";
-const string path_datosOrICI2 = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\DatosOrICI2.txt";
-const string path_datosOrTempICI2 = "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\DatosOrTempICI2.txt";
+const string path_tareas = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\Eventos.txt";
+const string path_ip = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\ips2.txt";
+const string path_fecha = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\Fechas.txt";
+const string path_suscritos = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\Suscritos2.txt";
+const string path_admins = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\Admins.txt";
+const string path_datosOr = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\DatosOr.txt";
+const string path_datosOrLDI = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\DatosOrLDI.txt";
+const string path_datosOrTemp = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\DatosOrTemp.txt";
+const string path_suscritosLDI = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\SuscritosLDI.txt";
+const string path_datosOrTempLDI = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\DatosOrTempLDI.txt";
+const string path_fecha_LDI = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\Fechas_LDI.txt";
+const string path_tareas_LDI = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\Eventos_LDI.txt";
+const string path_tareas_ici2 = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\EventosICI2.txt";
+const string path_fechas_ici2 = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\FechasICI2.txt";
+const string path_suscritos_ici2 = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\SuscritosICI2.txt";
+const string path_datosOrICI2 = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\DatosOrICI2.txt";
+const string path_datosOrTempICI2 = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\DatosOrTempICI2.txt";
 //Variables de acceso a la pagina de la Uni
 string usuarioICI = "al283189", usuarioLDI = "al263887", usuarioICI2 = "al261731";
 string contrasenaICI = "Donnet0708", contrasenaLDI = "Wera060102", contrasenaICI2 = "SPjl3490";
@@ -116,7 +116,7 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         //Consigue y limpia todas las tareas
         foreach (var item2 in fecha_tareas)
         {
-            
+            if (sapo == 72) { break;}//Condicional para que no de vueltas de mas inecesarias
             if (new[] { '1', '2', '3', '4', '5', '6', '7', '8', '9' }.Any(x => item2.Text.Contains(x)))
             {
                 if (!item2.Text.Contains("Sin eventos") && !item2.Text.Contains("Omitir"))
@@ -207,21 +207,26 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
                 }
                 fechaderemplazo = "";
             }
+            sapo++;
         }
+        sapo = 0;
         foreach (var item in numero_de_tareas)
-        {
-            //Limpiar info basura que arroja la pagina
-            if (!item.Text.Contains("Ocultar"))
-            {
-                contador_uni += 1;
-
-                //Decirle que mientras el contador de las tareas leidas sea mayor al contador de fechas ignoradas debe seguir leyendo tareas
-                if (contador_uni > saberes)
+        { 
+                if (sapo == (numero_de_tareas.Count - 6)){break; }//Condicional para que no de vueltas de mas inecesarias
+                //Limpiar info basura que arroja la pagina
+                if (!item.Text.Contains("Ocultar"))
                 {
-                    texto22 = texto22 + item.Text.ToString() + "\n";
+                    contador_uni += 1;
+
+                    //Decirle que mientras el contador de las tareas leidas sea mayor al contador de fechas ignoradas debe seguir leyendo tareas
+                    if (contador_uni > saberes)
+                    {
+                        texto22 = texto22 + item.Text.ToString() + "\n";
+                    }
                 }
-            }
+            sapo++;
         }
+        sapo = 0;
         saberes = 0;
         contador_uni = 0;
         //Para el texto de las tareas
@@ -355,7 +360,6 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         {
             Console.WriteLine(al);
         }
-        
         return "a";
     }
 }
@@ -466,18 +470,18 @@ void archivitos()
     //lee los id chat del documento administradores
     StreamReader Administradores;
     Administradores = File.OpenText(path_admins);
-    if (Administradores != null)
+    if (Administradores.ToString() != null)
     {
-#pragma warning disable CS8600 // Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
-        Admins = Administradores.ReadLine();
-#pragma warning restore CS8600 // Se va a convertir un literal nulo o un posible valor nulo en un tipo que no acepta valores NULL
+        var fz = "";
+        if ((fz = Administradores.ReadLine()) != null)
+        {
+            Admins = fz;
+        }
         Administradores.Close();
     }
     else
     {
-#pragma warning disable CS8602 // Desreferencia de una referencia posiblemente NULL.
         Administradores.Close();
-#pragma warning restore CS8602 // Desreferencia de una referencia posiblemente NULL.
     }
 }
 //Guarda las suscripciones en sus debidos archivos para tener ese almacenaje
@@ -486,7 +490,7 @@ void suscritos(String datos,string path)
     cmp = "";
     //se lee si hay datos en el archivo
     StreamReader lectura21 = File.OpenText(path);
-    if (lectura21 != null)
+    if (lectura21.ToString() != null)
     {
         cmp = lectura21.ReadToEnd();
         verdad = true;
@@ -495,9 +499,7 @@ void suscritos(String datos,string path)
     else
     {
         verdad = false;
-#pragma warning disable CS8602 // Desreferencia de una referencia posiblemente NULL.
         lectura21.Close();
-#pragma warning restore CS8602 // Desreferencia de una referencia posiblemente NULL.
     }
     StreamWriter suscritos = new(path);
     //si no se encuentran datos en el archivo pues los nuevos datos remplazan a todo lo que contenga el archivo
@@ -528,7 +530,7 @@ while (true)
     //Un contador de tiempo ya que en cada ciclo tarda 1s pues con un contador de 1 en 1 podemos contar el tiempo en segundos
     contadorcito++;
     //si el contador llega a 2 horas se hace una revision automatica
-    if (contadorcito % 10 == 0)
+    if (contadorcito % 7200 == 0)
     {
         try
         {

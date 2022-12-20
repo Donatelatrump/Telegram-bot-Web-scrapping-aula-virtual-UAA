@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ms6md7YIsjbGcQNZAmv2MOOpaAe5xwrddZ91M2Ybu9XRNzpHD2KxoNe1oz3alN3JJKEghGNb8MtoHMVN8YKqcQ==",
+  "dgSpecHash": "//DGQTOY/2L/K/OV+uTogrSF7H6RC5aIO5eYNmlqdq3yxkiiGDV4ii3RhIKXFCKlBjcRH+pqTostSSWgGO8KXw==",
   "success": true,
-  "projectFilePath": "D:\\Documentos\\Codigosd\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula_bot\\PerreVergueBot.csproj",
+  "projectFilePath": "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\PerreVergueBot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\donne\\.nuget\\packages\\csquery.netstandard\\1.3.6.1\\csquery.netstandard.1.3.6.1.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\fsharp.core\\4.5.2\\fsharp.core.4.5.2.nupkg.sha512",
