@@ -109,6 +109,7 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         driver.Quit();
         return "a";
     }
+    int contador_temporal = 0;
     //Despues de ingresar dirigirse a la pagina de calendario
     if (driver.Url == "https://aulavirtual.uaa.mx/calendar/view.php?view=month")
     {
@@ -119,99 +120,107 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         //Consigue y limpia todas las tareas
         foreach (var item2 in fecha_tareas)
         {
-            if (sapo == 72) { break;}//Condicional para que no de vueltas de mas inecesarias
-            if (new[] { '1', '2', '3', '4', '5', '6', '7', '8', '9' }.Any(x => item2.Text.Contains(x)))
+            if (item2.Text.ToString().Length != 0)
             {
+
+
+                
+                if (sapo == 40) { break; } else { contador_temporal += 1; }//Condicional para que no de vueltas de mas inecesarias
                 if (!item2.Text.Contains("Sin eventos") && !item2.Text.Contains("Omitir"))
                 {
-                    //En estas revisiones lo que hago es conseguir el dia exacto en que son las entregas, como los dias de la semana cambian cada mes su posicion
-                    //lo que hago es contar los caracteres de cada caso del dia de la semana para saber en qu posicion del string esta la fecha, asi sea de 2 o 1 digito
-                    //asi como si las tareas son mayores a 1 una palabra del arreglo cambia de evento a eventos lo que hace que la posicion de la fecha cambie
-                    //despues la comparo con la fecha actual y si es igual o mayor las guardo en un archivo de texto
+                    if (new[] { '1', '2', '3', '4', '5', '6', '7', '8', '9' }.Any(x => item2.Text.Contains(x)))
+                    {
+                        Console.WriteLine(item2.Text + "-----" + item2.Text.ToString().Length);
+                        //En estas revisiones lo que hago es conseguir el dia exacto en que son las entregas, como los dias de la semana cambian cada mes su posicion
+                        //lo que hago es contar los caracteres de cada caso del dia de la semana para saber en qu posicion del string esta la fecha, asi sea de 2 o 1 digito
+                        //asi como si las tareas son mayores a 1 una palabra del arreglo cambia de evento a eventos lo que hace que la posicion de la fecha cambie
+                        //despues la comparo con la fecha actual y si es igual o mayor las guardo en un archivo de texto
+                        fechaderemplazo = "";
+                        //Para Evento
+                        //Para el lunes PA
+                        if (item2.Text.Contains("lunes") && item2.Text.Contains("evento"))
+                        {
+                            FECHa[0] = item2.Text.ToString()[17];
+                            FECHa[1] = item2.Text.ToString()[18];
+                        }
+
+                        //Para Martes Jueves y Sabado PA                                                  
+                        if (new[] { "martes", "sábado", "jueves", "evento" }.Any(x => item2.Text.Contains(x)))
+                        {
+                            FECHa[0] = item2.Text.ToString()[18];
+                            FECHa[1] = item2.Text.ToString()[19];
+                        }
+                        //Para Miercoles PA
+                        if (item2.Text.Contains("miércoles") && item2.Text.Contains("evento"))
+                        {
+                            FECHa[0] = item2.Text.ToString()[21];
+                            FECHa[1] = item2.Text.ToString()[22];
+                        }
+                        //Para Viernes y domingo PA
+                        if (item2.Text.Contains("viernes") || item2.Text.Contains("domingo") && item2.Text.Contains("evento"))
+                        {
+                            FECHa[0] = item2.Text.ToString()[19];
+                            FECHa[1] = item2.Text.ToString()[20];
+                        }
+                        //Para Eventos multiples
+                        //Para Martes, Jueves y Sabado PA
+                        if (item2.Text.Contains("sábado") && item2.Text.Contains("eventos"))
+                        {
+                            FECHa[0] = item2.Text.ToString()[19];
+                            FECHa[1] = item2.Text.ToString()[20];
+                        }
+                        if (new[] { "martes", "lunes", "eventos" }.Any(z => item2.Text.Contains(z)))
+                        {
+                            FECHa[0] = item2.Text.ToString()[18];
+                            FECHa[1] = item2.Text.ToString()[19];
+                        }
+                        if (item2.Text.Contains("jueves") && item2.Text.Contains("eventos"))
+                        {
+                            FECHa[0] = item2.Text.ToString()[19];
+                            FECHa[1] = item2.Text.ToString()[20];
+                        }
+                        //Para domingo y viernes PA
+                        if (item2.Text.Contains("domingo") && item2.Text.Contains("eventos"))
+                        {
+                            FECHa[0] = item2.Text.ToString()[20];
+                            FECHa[1] = item2.Text.ToString()[21];
+                        }
+                        if (item2.Text.Contains("viernes") && item2.Text.Contains("eventos"))
+                        {
+                            FECHa[0] = item2.Text.ToString()[20];
+                            FECHa[1] = item2.Text.ToString()[21];
+                        }
+
+                        //Para miercoles PA
+                        if (item2.Text.Contains("miércoles") && item2.Text.Contains("eventos"))
+                        {
+                            FECHa[0] = item2.Text.ToString()[22];
+                            FECHa[1] = item2.Text.ToString()[23];
+                        }
+                        if (FECHa[0] != ' ')
+                        {
+                            fechaderemplazo += FECHa[0];
+                        }
+                        if (FECHa[1] != ' ')
+                        {
+                            fechaderemplazo += FECHa[1];
+                        }
+                        if (Int32.Parse(fechaderemplazo) >= Int32.Parse(fecha_actual))
+                        {
+                            fechas_aula2 += item2.Text.ToString() + "\n";
+                        }
+                        else
+                        {
+                            FECHa[2] = item2.Text.ToString()[0];
+                            saberes += Int32.Parse(FECHa[2].ToString());
+                        }
+                    }
                     fechaderemplazo = "";
-                    //Para Evento
-                    //Para el lunes PA
-                    if (item2.Text.Contains("lunes") && item2.Text.Contains("evento"))
-                    {
-                        FECHa[0] = item2.Text.ToString()[17];
-                        FECHa[1] = item2.Text.ToString()[18];
-                    }
-
-                    //Para Martes Jueves y Sabado PA                                                  
-                    if (new[] { "martes", "sábado", "jueves", "evento" }.Any(x => item2.Text.Contains(x)))
-                    {
-                        FECHa[0] = item2.Text.ToString()[18];
-                        FECHa[1] = item2.Text.ToString()[19];
-                    }
-                    //Para Miercoles PA
-                    if (item2.Text.Contains("miércoles") && item2.Text.Contains("evento"))
-                    {
-                        FECHa[0] = item2.Text.ToString()[21];
-                        FECHa[1] = item2.Text.ToString()[22];
-                    }
-                    //Para Viernes y domingo PA
-                    if (item2.Text.Contains("viernes") || item2.Text.Contains("domingo") && item2.Text.Contains("evento"))
-                    {
-                        FECHa[0] = item2.Text.ToString()[19];
-                        FECHa[1] = item2.Text.ToString()[20];
-                    }
-                    //Para Eventos multiples
-                    //Para Martes, Jueves y Sabado PA
-                    if (item2.Text.Contains("sábado") && item2.Text.Contains("eventos"))
-                    {
-                        FECHa[0] = item2.Text.ToString()[19];
-                        FECHa[1] = item2.Text.ToString()[20];
-                    }
-                    if (new[] { "martes", "lunes", "eventos" }.Any(z => item2.Text.Contains(z)))
-                    {
-                        FECHa[0] = item2.Text.ToString()[18];
-                        FECHa[1] = item2.Text.ToString()[19];
-                    }
-                    if (item2.Text.Contains("jueves") && item2.Text.Contains("eventos"))
-                    {
-                        FECHa[0] = item2.Text.ToString()[19];
-                        FECHa[1] = item2.Text.ToString()[20];
-                    }
-                    //Para domingo y viernes PA
-                    if (item2.Text.Contains("domingo") && item2.Text.Contains("eventos"))
-                    {
-                        FECHa[0] = item2.Text.ToString()[20];
-                        FECHa[1] = item2.Text.ToString()[21];
-                    }
-                    if (item2.Text.Contains("viernes") && item2.Text.Contains("eventos"))
-                    {
-                        FECHa[0] = item2.Text.ToString()[20];
-                        FECHa[1] = item2.Text.ToString()[21];
-                    }
-
-                    //Para miercoles PA
-                    if (item2.Text.Contains("miércoles") && item2.Text.Contains("eventos"))
-                    {
-                        FECHa[0] = item2.Text.ToString()[22];
-                        FECHa[1] = item2.Text.ToString()[23];
-                    }
-                    if (FECHa[0] != ' ')
-                    {
-                        fechaderemplazo += FECHa[0];
-                    }
-                    if (FECHa[1] != ' ')
-                    {
-                        fechaderemplazo += FECHa[1];
-                    }
-                    if (Int32.Parse(fechaderemplazo) >= Int32.Parse(fecha_actual))
-                    {
-                        fechas_aula2 += item2.Text.ToString() + "\n";
-                    }
-                    else
-                    {
-                        FECHa[2] = item2.Text.ToString()[0];
-                        saberes += Int32.Parse(FECHa[2].ToString());
-                    }
                 }
-                fechaderemplazo = "";
+                sapo++;
             }
-            sapo++;
         }
+        Console.WriteLine(contador_temporal);
         sapo = 0;
         foreach (var item in numero_de_tareas)
         { 
