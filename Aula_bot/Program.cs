@@ -23,7 +23,6 @@ using System.Threading;
 using System.Runtime.Versioning;
 using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium.DevTools.V106.Debugger;
-using System.Security.Cryptography.X509Certificates;
 
 
 
@@ -76,7 +75,6 @@ void revisar_minecraft_activo()
 //Funcion de web scrapping para sacar las tareas y fechas de la uni dependiendo de que carrera sea
 string aula(string path, string Usuario, string Password2, string fecha1,string tarea1,string update)
 {
-    
     saberes = 0;
     contador_uni = 0;
     texto22 = "";
@@ -103,13 +101,11 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
             bot.SendMessage(update, "Aula esta caido");
         }catch(Exception ar)
         {
-            Console.WriteLine(ar);
+            Console.WriteLine("No pudimos conectarnos a Aula\n"+ar);
         }
-       
         driver.Quit();
         return "a";
     }
-    int contador_temporal = 0;
     //Despues de ingresar dirigirse a la pagina de calendario
     if (driver.Url == "https://aulavirtual.uaa.mx/calendar/view.php?view=month")
     {
@@ -122,15 +118,14 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         {
             if (item2.Text.ToString().Length != 0)
             {
-
-
-                
-                if (sapo == 40) { break; } else { contador_temporal += 1; }//Condicional para que no de vueltas de mas inecesarias
+                if (sapo == 40) //Condicional para que no de vueltas de mas inecesarias
+                {
+                    break; //Para romper el foreach
+                }
                 if (!item2.Text.Contains("Sin eventos") && !item2.Text.Contains("Omitir"))
                 {
                     if (new[] { '1', '2', '3', '4', '5', '6', '7', '8', '9' }.Any(x => item2.Text.Contains(x)))
                     {
-                        Console.WriteLine(item2.Text + "-----" + item2.Text.ToString().Length);
                         //En estas revisiones lo que hago es conseguir el dia exacto en que son las entregas, como los dias de la semana cambian cada mes su posicion
                         //lo que hago es contar los caracteres de cada caso del dia de la semana para saber en qu posicion del string esta la fecha, asi sea de 2 o 1 digito
                         //asi como si las tareas son mayores a 1 una palabra del arreglo cambia de evento a eventos lo que hace que la posicion de la fecha cambie
@@ -220,7 +215,6 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
                 sapo++;
             }
         }
-        Console.WriteLine(contador_temporal);
         sapo = 0;
         foreach (var item in numero_de_tareas)
         { 
@@ -242,59 +236,58 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         saberes = 0;
         contador_uni = 0;
         //Para el texto de las tareas
-        StreamReader Nanda = File.OpenText(fecha1);
-        StreamReader Even = File.OpenText(tarea1);
-        if (Nanda != null && Even != null)
+        try
         {
-            //Fechas
-            fechas_aula = Nanda.ReadToEnd();
-            Nanda.Close();
-            StreamWriter dayo = new(fecha1);
-            if (fechas_aula2 != "")
-            {
-                if (fechas_aula != fechas_aula2)
+            StreamReader Nanda = File.OpenText(fecha1);
+            StreamReader Even = File.OpenText(tarea1);
+                //Fechas
+                fechas_aula = Nanda.ReadToEnd();
+                Nanda.Close();
+                StreamWriter dayo = new(fecha1);
+                if (fechas_aula2 != "")
                 {
-                    dayo.Write(fechas_aula2);
-                    dayo.Close();
+                    if (fechas_aula != fechas_aula2)
+                    {
+                        dayo.Write(fechas_aula2);
+                        dayo.Close();
+                    }
+                    else
+                    {
+                        dayo.Write(fechas_aula2);
+                        dayo.Close();
+                    }
                 }
                 else
                 {
-                    dayo.Write(fechas_aula2);
+                    dayo.Write(fechas_aula);
                     dayo.Close();
                 }
-            }
-            else
-            {
-                dayo.Write(fechas_aula);
-                dayo.Close();
-            }
-            //Eventos
-            fechas_aula2 = "";
-            eventos_aula = Even.ReadToEnd();
-            Even.Close();
-            StreamWriter eventos = new(tarea1);
-            if (texto22 != "")
-            {
-                if (eventos_aula != texto22)
+                //Eventos
+                fechas_aula2 = "";
+                eventos_aula = Even.ReadToEnd();
+                Even.Close();
+                StreamWriter eventos = new(tarea1);
+                if (texto22 != "")
                 {
-                    eventos.WriteLine(texto22);
-                    eventos.Close();
+                    if (eventos_aula != texto22)
+                    {
+                        eventos.WriteLine(texto22);
+                        eventos.Close();
+                    }
+                    else
+                    {
+                        eventos.WriteLine(texto22);
+                        eventos.Close();
+                    }
                 }
                 else
                 {
-                    eventos.WriteLine(texto22);
+                    eventos.WriteLine(eventos_aula);
                     eventos.Close();
                 }
-            }
-            else
-            {
-                eventos.WriteLine(eventos_aula);
-                eventos.Close();
-            }
-        }
-        else
+        }catch(Exception Noabrio)
         {
-            Console.WriteLine("No se pudo abrir el archivo");
+            Console.WriteLine("No se pudo abrir uno o ambos archivos de Fechas o Eventos, el codigo de error es \n"+Noabrio);
         }
         //Contador de lineas de eventos
         StreamReader Primer_evento = File.OpenText(fecha1);
@@ -352,7 +345,6 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         var e = a.GetAttribute("href");
         driver.Navigate().GoToUrl(e);
         driver.Quit();
-
         //contamos cuantas lineas tiene el documento final ordenado y lo guardamos en una variable 
         StreamReader ola = File.OpenText(path);
         supercontador = 0;
@@ -370,7 +362,7 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
             bot.SendMessage(update, "Al parecer alguna de nuestros accesos esta caido, reportalo con el desarrollador por favor :3");
         }catch(Exception al)
         {
-            Console.WriteLine(al);
+            Console.WriteLine("No se pudo encontrar al destinatario\n"+al);
         }
         return "a";
     }
@@ -421,7 +413,6 @@ bool revision(string lolo, string chavo,string update)
             }
         }
         aioch.Close();
-
     }
     //mientras que el string tareas_diferencias no este vacia (significa que si hubo nuevas tareas)
     if (tareas_diferencias != "")
@@ -545,13 +536,13 @@ while (true)
             //se reinicia el contador para que vuelva a comenzar
             contadorcito = 0;
             //si al hacer la revision de aula esta detecta nuevas tareas entra en este caso
-            if (revision(path_datosOr, path_datosOrTemp, "0000") == true)
+            if (revision(path_datosOr, path_datosOrTemp, "000000") == true)
             {
                 StreamReader lectura3 = File.OpenText(path_suscritos);
                 //se leen todos los usuarios registrados y se les envia las nuevas tareas detectadas
                 while (lectura3.ToString() != null)
                 {
-                    var tem = "";
+                    var tem = "";//al hacer esto quitamos los avisos de posible null
                     if ((tem = lectura3.ReadLine()) != null)
                     {
                         bot.SendMessage(chatId: tem, text: tareas_diferencias);
@@ -559,36 +550,33 @@ while (true)
                 }
                 lectura3.Close();
             }
-            if (revision(path_datosOrLDI, path_datosOrTempLDI, "0000") == true)
+            if (revision(path_datosOrLDI, path_datosOrTempLDI, "000000") == true)
             {
                 StreamReader lectura3 = File.OpenText(path_suscritosLDI);
                 //se leen todos los usuarios registrados y se les envia las nuevas tareas detectadas
                 while (lectura3.ToString() != null)
                 {
-                    var tema = "";
+                    var tema = "";//al hacer esto quitamos los avisos de posible null
                     if ((tema = lectura3.ReadLine()) != null)
                     {
                         bot.SendMessage(chatId: tema, text: tareas_diferencias);
                     }
                 }
-
                 lectura3.Close();
             }
-            if (revision(path_datosOrICI2, path_datosOrTempICI2, "0000") == true)
+            if (revision(path_datosOrICI2, path_datosOrTempICI2, "000000") == true)
             {
                 StreamReader lectura3 = File.OpenText(path_suscritos_ici2);
                 //se leen todos los usuarios registrados y se les envia las nuevas tareas detectadas
                 while (lectura3.ToString() != null)
                 {
-                    var hg = "";
+                    var hg = "";//al hacer esto quitamos los avisos de posible null
                     if ((hg = lectura3.ReadLine()) != null)
                     {
                         bot.SendMessage(chatId: hg, text: tareas_diferencias);
                     }
                 }
-
                 lectura3.Close();
-
             }
             //se revisa la direccion ip si esta es diferente a la almacenada, bandera el boleano se vuelve true 
             direccion_ip();
@@ -600,7 +588,7 @@ while (true)
                 {
                     while (lectura.ReadLine() != null)
                     {
-                        var gh = "";
+                        var gh = "";//al hacer esto quitamos los avisos de posible null
                         if ((gh = lectura.ReadLine()) != null)
                         {
                             bot.SendMessage(chatId: gh, text: "La direccion ip del servidor ha cambiado a: " + texto2 + ":25565");
@@ -610,9 +598,7 @@ while (true)
                 }
                 else
                 {
-
                     lectura.Close();
-
                 }
             }
             else
@@ -622,7 +608,7 @@ while (true)
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
+            Console.WriteLine("Fallo la revision automatica, codigo de error:\n"+e);
         }
     }
     //si el contador aun no llega al tiempo de 2 horas se pasa directamente a la comprobacion de mensajes 
@@ -778,7 +764,6 @@ while (true)
                         }
                         else
                         {
-                            
                             bot.SendMessage(update.Message.Chat.Id, "Listo ya estas suscrito en ICI2");
                             suscritos(update.Message.Chat.Id.ToString(), path_suscritos_ici2);
                         }
@@ -795,7 +780,6 @@ while (true)
                             {
                                 bot.SendMessage(update.Message.Chat.Id, "No se detecto una nueva tarea\n");
                             }
-                        
                         break;
                     case "/aula_ICI":
                         bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de la captura de los datos!\n");
@@ -805,7 +789,6 @@ while (true)
                             aula(path_datosOr,usuarioICI, contrasenaICI, path_fecha, path_tareas, update.Message.Chat.Id.ToString());
                             veces = true;
                             ultracontador = supercontador;
-
                         }
                         StreamReader aiuda = File.OpenText(path_datosOr);
                         if (ultracontador!=0)
@@ -857,7 +840,6 @@ while (true)
                             suscritos(update.Message.Chat.Id.ToString(), path_suscritos);
                         }
                         break;
-                        
                      //Inicio de comandos para el bot de Minecraft
                     // Da una intro del bot , el que hace
                     case "/start":
