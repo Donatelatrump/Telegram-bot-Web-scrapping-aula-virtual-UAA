@@ -23,6 +23,7 @@ using System.Threading;
 using System.Runtime.Versioning;
 using Microsoft.Extensions.Configuration;
 using OpenQA.Selenium.DevTools.V106.Debugger;
+using System.Security.Cryptography.X509Certificates;
 
 
 
@@ -30,23 +31,24 @@ using OpenQA.Selenium.DevTools.V106.Debugger;
 int contador_temporal = 0, contador_original = 0, contador2 = 0, contadores = 0, contadorcito = 0, supercontador = 0, saberes = 0, contador_uni = 0, ultracontador=0,megacontador =0,conta=0,sapo=0;
 string texto2="",lineas="", temporal="", aveces = "", cmp = "", tareas_diferencias = "", texto = "", fechas_aula, fechas_aula2 = "", eventos_aula, fechaderemplazo = "", Admins = "", texto22 = "", fecha_actual = "";
 //Declaracion de las rutas de los archivos que almacenan la informacion (debo encontrar una mejor manera de guardarlo, una manera mas eficiente)
-const string path_tareas = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\Eventos.txt";
-const string path_ip = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\ips2.txt";
-const string path_fecha = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\Fechas.txt";
-const string path_suscritos = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\Suscritos2.txt";
-const string path_admins = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\Admins.txt";
-const string path_datosOr = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\DatosOr.txt";
-const string path_datosOrLDI = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\DatosOrLDI.txt";
-const string path_datosOrTemp = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\DatosOrTemp.txt";
-const string path_suscritosLDI = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\SuscritosLDI.txt";
-const string path_datosOrTempLDI = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\DatosOrTempLDI.txt";
-const string path_fecha_LDI = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\Fechas_LDI.txt";
-const string path_tareas_LDI = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\Eventos_LDI.txt";
-const string path_tareas_ici2 = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\EventosICI2.txt";
-const string path_fechas_ici2 = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\FechasICI2.txt";
-const string path_suscritos_ici2 = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\SuscritosICI2.txt";
-const string path_datosOrICI2 = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\DatosOrICI2.txt";
-const string path_datosOrTempICI2 = "E:\\Codigos\\C#\\Telegram-Bot\\Aula_bot\\DatosOrTempICI2.txt";
+ string direct = Directory.GetCurrentDirectory();
+ string path_tareas = direct + "\\Eventos.txt";
+ string path_ip = direct + "\\ips2.txt";
+ string path_fecha = direct + "\\Fechas.txt";
+ string path_suscritos = direct + "\\Suscritos2.txt";
+ string path_admins = direct + "\\Admins.txt";
+ string path_datosOr = direct + "\\DatosOr.txt";
+ string path_datosOrLDI = direct + "\\DatosOrLDI.txt";
+ string path_datosOrTemp = direct + "\\DatosOrTemp.txt";
+ string path_suscritosLDI = direct + "\\SuscritosLDI.txt";
+ string path_datosOrTempLDI = direct + "\\DatosOrTempLDI.txt";
+ string path_fecha_LDI = direct + "\\Fechas_LDI.txt";
+ string path_tareas_LDI = direct + "\\Eventos_LDI.txt";
+ string path_tareas_ici2 = direct + "\\EventosICI2.txt";
+ string path_fechas_ici2 = direct + "\\FechasICI2.txt";
+ string path_suscritos_ici2 = direct + "\\SuscritosICI2.txt";
+ string path_datosOrICI2 = direct + "\\DatosOrICI2.txt";
+ string path_datosOrTempICI2 = direct + "\\DatosOrTempICI2.txt";
 //Variables de acceso a la pagina de la Uni
 string usuarioICI = "al283189", usuarioLDI = "al263887", usuarioICI2 = "al261731";
 string contrasenaICI = "Donnet0708", contrasenaLDI = "Wera060102", contrasenaICI2 = "SPjl3490";
@@ -74,6 +76,7 @@ void revisar_minecraft_activo()
 //Funcion de web scrapping para sacar las tareas y fechas de la uni dependiendo de que carrera sea
 string aula(string path, string Usuario, string Password2, string fecha1,string tarea1,string update)
 {
+    
     saberes = 0;
     contador_uni = 0;
     texto22 = "";
@@ -369,19 +372,15 @@ bool revision(string lolo, string chavo,string update)
     tareas_diferencias = "";
     contador_original = 0;
     contador_temporal = 0;
-    switch (lolo)
+    if(lolo == path_datosOr)
     {
-        case path_datosOr:
-            //se vuelve a recopilar las tareas de aula con la funcion aula pero se guarda en otro archivo txt
-            aula(path_datosOrTemp,usuarioICI,contrasenaICI,path_fecha,path_tareas,update);
-            break;
-        case path_datosOrLDI:
-          
-            aula(path_datosOrTempLDI,usuarioLDI,contrasenaLDI,path_fecha_LDI,path_tareas_LDI,update);
-            break;
-        case path_datosOrICI2:
-            aula(path_datosOrTempICI2, usuarioICI2, contrasenaICI2, path_fechas_ici2, path_tareas_ici2,update);
-            break;
+        aula(path_datosOrTemp, usuarioICI, contrasenaICI, path_fecha, path_tareas, update);
+    }else if(lolo == path_datosOrLDI)
+    {
+        aula(path_datosOrTempLDI, usuarioLDI, contrasenaLDI, path_fecha_LDI, path_tareas_LDI, update);
+    }else if(lolo == path_datosOrICI2)
+    {
+        aula(path_datosOrTempICI2, usuarioICI2, contrasenaICI2, path_fechas_ici2, path_tareas_ici2, update);
     }
     //Contador de lineas original
     StreamReader temporalci2 = File.OpenText(lolo);
@@ -524,7 +523,7 @@ ProcessStartInfo psi = new()
     CreateNoWindow = false,
     FileName = "D:\\Documentos\\Server nuevo\\iniciar.bat"
 };
-//Ciclo infinito de constante busqueda de actualizaciones ( mensajes )
+//Ciclo infinito de ante busqueda de actualizaciones ( mensajes )
 while (true)
 {
     //Un contador de tiempo ya que en cada ciclo tarda 1s pues con un contador de 1 en 1 podemos contar el tiempo en segundos
