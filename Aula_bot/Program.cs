@@ -99,9 +99,11 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         try
         {
             bot.SendMessage(update, "Aula esta caido");
-        }catch(Exception ar)
+            bot.SendAnimation(update, "https://i.pinimg.com/originals/d1/d6/c0/d1d6c0fe9c91839b97e361387b505b97.gif");
+        }
+        catch(Exception ar)
         {
-            Console.WriteLine("No pudimos conectarnos a Aula\n"+ar);
+            Console.WriteLine("No pudimos conectarnos con el remitente\n"+ar);
         }
         driver.Quit();
         return "a";
@@ -658,12 +660,14 @@ while (true)
                                 }
                             }
                             bot.SendMessage(update.Message.Chat.Id, "=============================\n");
+                            bot.SendAnimation(update.Message.Chat.Id, "https://thumbs.gfycat.com/MeaslyJaggedBrontosaurus-size_restricted.gif");
                             aiuda2.Close();
                         }
                         else
                         {
                             aiuda2.Close();
-                            bot.SendMessage(update.Message.Chat.Id, "=============================\n              Sin tareas detectadas a descansar :3           \n");
+                            bot.SendMessage(update.Message.Chat.Id, "=============================\n              Sin tareas detectadas a descansar :3\n");
+                            bot.SendAnimation(update.Message.Chat.Id, "https://i.pinimg.com/originals/e0/03/69/e00369b162f3b91e05b2198efcf8f73f.gif");
                         }
                         break;
                     case "/Sucribirme_LDI":
@@ -732,12 +736,14 @@ while (true)
                                 }
                             }
                             bot.SendMessage(update.Message.Chat.Id, "=============================\n");
+                            bot.SendAnimation(update.Message.Chat.Id, "https://thumbs.gfycat.com/MeaslyJaggedBrontosaurus-size_restricted.gif");
                             aiu.Close();
                         }
                         else
                         {
                             aiu.Close();
-                            bot.SendMessage(update.Message.Chat.Id, "=============================\n              Sin tareas detectadas a descansar :3           \n");
+                            bot.SendMessage(update.Message.Chat.Id, "=============================\n              Sin tareas detectadas a descansar :3\n");
+                            bot.SendAnimation(update.Message.Chat.Id, "https://i.pinimg.com/originals/ca/39/9e/ca399e41629b0bc8d91f8d6507b15707.gif");
                         }
 
                         break;
@@ -804,12 +810,14 @@ while (true)
                                 }
                             }
                             bot.SendMessage(update.Message.Chat.Id, "=============================\n");
+                            bot.SendAnimation(update.Message.Chat.Id, "https://thumbs.gfycat.com/MeaslyJaggedBrontosaurus-size_restricted.gif");
                             aiuda.Close();
                         }
                         else
                         {
                             aiuda.Close();
-                            bot.SendMessage(update.Message.Chat.Id, "=============================\n              Sin tareas detectadas a descansar :3           \n");
+                            bot.SendMessage(update.Message.Chat.Id, "===================================\n              Sin tareas detectadas a descansar :3\n");
+                            bot.SendAnimation(update.Message.Chat.Id, "https://i.pinimg.com/originals/b8/47/7b/b8477b8f1cf8fcb00e37fbec31c2a22e.gif");
                         }
                         break;
                     case "/Suscribirme_ICI":
@@ -844,6 +852,7 @@ while (true)
                     // Da una intro del bot , el que hace
                     case "/start":
                         bot.SendMessage(update.Message.Chat.Id, "Hola yo soy un bot de ayuda con el recordatorio y vista de las tareas de aula virtual\nPor el momento soy una beta pero espero que con tu ayuda\nPueda mejorar para facilitarte el recordatorio de tus tareas\n Y proximamente añadir mas cosas útiles :)");
+                        bot.SendAnimation(update.Message.Chat.Id, "http://68.media.tumblr.com/0c6c24139702399121af533ab6011237/tumblr_oqcj9ycnPO1w46s3lo1_540.gif");
                         break;
                     //descarga las tareas de aula y las envia
                     
@@ -853,16 +862,19 @@ while (true)
                         if (minecraft == false)  //revisa si el server de minecraft esta encendido , si no lo esta lo enciende
                         {
                             bot.SendMessage(update.Message.Chat.Id, "Encendiendo Guap@!!\n");
+                            bot.SendAnimation(update.Message.Chat.Id, "https://i.pinimg.com/originals/51/b2/55/51b255a6dbe1541daeea3cf405c78d35.gif");
                             Process.Start(psi);
                             Thread.Sleep(30000);
                             revisar_minecraft_activo();
                             if (minecraft == true)
                             {
                                 bot.SendMessage(update.Message.Chat.Id, "Listo ya esta encendido :3\n");
+                                bot.SendPhoto(update.Message.Chat.Id, "https://c.wallhere.com/photos/9b/77/Kono_Subarashii_Sekai_ni_Shukufuku_wo_Aqua_KonoSuba_Sat_Kazuma_Kono_Subarashii_Sekai_ni_Shukufuku_wo_Megumin_Darkness_KonoSuba_thumbs_up_anime_girls_group_of_people-1827599.jpg!d");
                             }
                             else
                             {
                                 bot.SendMessage(update.Message.Chat.Id, "Algo fallo en la configuracion de nuevos mods OnO\n");
+                                bot.SendAnimation(update.Message.Chat.Id, "https://i.pinimg.com/originals/d1/d6/c0/d1d6c0fe9c91839b97e361387b505b97.gif");
                             }
                         }
                         else
@@ -881,10 +893,12 @@ while (true)
                         if (minecraft == true)
                         {
                             bot.SendMessage(update.Message.Chat.Id, "Servidor de minecraft Online");
+                            bot.SendAnimation(update.Message.Chat.Id, "https://4.bp.blogspot.com/-HaaDuzV2Nfw/WMnIttLC8HI/AAAAAAAAFUo/qFunMfVnotchM2LlKcCyJcYYBtyyeZYHgCLcB/s1600/ks265.gif");
                         }
                         else
                         {
                             bot.SendMessage(update.Message.Chat.Id, "Servidor de minecraft Ofline");
+                            bot.SendAnimation(update.Message.Chat.Id, "https://4.bp.blogspot.com/-HaaDuzV2Nfw/WMnIttLC8HI/AAAAAAAAFUo/qFunMfVnotchM2LlKcCyJcYYBtyyeZYHgCLcB/s1600/ks265.gif");
                         }
                         break;
                     //Apaga el servidor de minecraft
@@ -901,6 +915,7 @@ while (true)
                                 if (minecraft == false)
                                 {
                                     bot.SendMessage(update.Message.Chat.Id, "Listo ya esta apagado\n");
+                                    bot.SendAnimation(update.Message.Chat.Id, "https://64.media.tumblr.com/f85f4e3a5782115be09be67701b3bcaf/e53ab1066885b2b9-9a/s540x810/d62f1ca8b1ed33d09f2fa632d51136b9f24adcc1.gifv");
                                 }
                                 else
                                 {
@@ -916,6 +931,7 @@ while (true)
                     //Informa de todos los comandos accesibles
                     case "/help":
                         bot.SendMessage(update.Message.Chat.Id, "========================\n\n/start - pequeña presentación del bot\r\n/cmp_LDI - compara manualmente las tareas de aula de la carrera de LDI\r\n/aula_LDI - consigue que tareas tienes activas para la carrera de LDI\r\n/Sucribirme_LDI - Si detecta una nueva tarea, te lo hace saber en un mensaje dandote la tarea y fecha de entrega \r\n/cmp_ICI - compara manualmente las tareas de aula de la carrera de ICI\r\n/aula_ICI - consigue que tareas tienes activas para la carrera de ICI\r\n/Suscribirme_ICI - Si detecta una nueva tarea, te lo hace saber en un mensaje dandote la tarea y fecha de entrega\r\n/cmp_ICI2 - compara manualmente las tareas de aula de la carrera de ICI\r\n/aula_ICI2 - consigue que tareas tienes activas para la carrera de ICI\r\n/Suscribirme_ICI2 - Si detecta una nueva tarea, te lo hace saber en un mensaje dandote la tarea y fecha de entrega\n\n========================\n");
+                        bot.SendAnimation(update.Message.Chat.Id, "https://media.tenor.com/oim29qOLORkAAAAC/konosuba-dance.gif");
                         break;
                     //Si lo ingresado no esta en los comandos le dice que no lo detecto
                     default:
