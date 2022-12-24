@@ -26,8 +26,8 @@ using OpenQA.Selenium.DevTools.V106.Debugger;
 
 
 
-//Declaracion de variables necesarias, (es posible rutilizar variables )
-int contador_temporal = 0, contador_original = 0, contador2 = 0, contadorcito = 0, supercontador = 0, saberes = 0, contador_uni = 0, ultracontador=0,megacontador =0,conta=0,sapo=0;
+//Declaracion de variables necesarias
+int[] contador = new int[11];
 string texto2="",lineas="", temporal="", aveces = "", cmp = "", tareas_diferencias = "", texto = "", fechas_aula, fechas_aula2 = "", eventos_aula, fechaderemplazo = "", Admins = "", texto22 = "", fecha_actual = "";
 //Declaracion de las rutas de los archivos que almacenan la informacion (debo encontrar una mejor manera de guardarlo, una manera mas eficiente)
  string direct = Directory.GetCurrentDirectory();
@@ -51,7 +51,6 @@ string texto2="",lineas="", temporal="", aveces = "", cmp = "", tareas_diferenci
 //Variables de acceso a la pagina de la Uni
 string usuarioICI = "al283189", usuarioLDI = "al263887", usuarioICI2 = "al261731";
 string contrasenaICI = "Donnet0708", contrasenaLDI = "Wera060102", contrasenaICI2 = "SPjl3490";
-char[] fechita = new char[2];
 char[] numeros = new char[50];
 char[] FECHa = new char[3];
 char[] fecha = new char[2];
@@ -72,18 +71,18 @@ void revisar_minecraft_activo()
         minecraft = true;
     }
 }
+DateTime thisDay = DateTime.Today;
 //Funcion de web scrapping para sacar las tareas y fechas de la uni dependiendo de que carrera sea
 string aula(string path, string Usuario, string Password2, string fecha1,string tarea1,string update)
 {
-    saberes = 0;
-    contador_uni = 0;
+    contador[5] = 0;
+    contador[6] = 0;
+    contador[10] = 0;
     texto22 = "";
     //Tomar solo los dias de la fecha actual 
-    DateTime thisDay = DateTime.Today;
     fecha[0] = thisDay.ToString()[0];
     fecha[1] = thisDay.ToString()[1];
-    fecha_actual += fecha[0];
-    fecha_actual += fecha[1];
+    fecha_actual = new string(fecha);
     //Abrir chomre en aula y enviarle los datos de acceso 
     IWebDriver driver = new ChromeDriver();
    driver.Manage().Window.Minimize();
@@ -120,7 +119,7 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         {
             if (item2.Text.ToString().Length != 0)
             {
-                if (sapo == 40) //Condicional para que no de vueltas de mas inecesarias
+                if (contador[10] == 40) //Condicional para que no de vueltas de mas inecesarias
                 {
                     break; //Para romper el foreach
                 }
@@ -208,34 +207,32 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
                         else
                         {
                             FECHa[2] = item2.Text.ToString()[0];
-                            saberes += Int32.Parse(FECHa[2].ToString());
+                            contador[5]= Int32.Parse(FECHa[2].ToString());
                         }
                     }
                     fechaderemplazo = "";
                 }
-                sapo++;
+                contador[10]+=1;
             }
         }
-        sapo = 0;
+        contador[10] = 0;
         foreach (var item in numero_de_tareas)
         { 
-                if (sapo == (numero_de_tareas.Count - 6)){break; }//Condicional para que no de vueltas de mas inecesarias
+                if (contador[10] == (numero_de_tareas.Count - 6)){break; }//Condicional para que no de vueltas de mas inecesarias
                 //Limpiar info basura que arroja la pagina
                 if (!item.Text.Contains("Ocultar"))
                 {
-                    contador_uni += 1;
+                contador[6] += 1;
 
                     //Decirle que mientras el contador de las tareas leidas sea mayor al contador de fechas ignoradas debe seguir leyendo tareas
-                    if (contador_uni > saberes)
+                    if (contador[6] > contador[5])
                     {
-                        texto22 = texto22 + item.Text.ToString() + "\n";
+                        texto22 += item.Text.ToString() + "\n";
                     }
                 }
-            sapo++;
+            contador[10] += 1;
         }
-        sapo = 0;
-        saberes = 0;
-        contador_uni = 0;
+        contador[10] = 0;
         //Para el texto de las tareas
         try
         {
@@ -292,7 +289,7 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         }
         //Contador de lineas de eventos
         StreamReader Primer_evento = File.OpenText(fecha1);
-        contador2 = 0;
+        contador[2] = 0;
         while (Primer_evento.ReadLine() != null)
         {
             var xc = "";
@@ -300,12 +297,11 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
             {
                 temporal = xc.ToString();
             }
-            if(temporal != "")
+            if (temporal != "")
             {
-                numeros[contador2] = temporal[0];
-                contador2 += 1;
+                numeros[contador[2]] = temporal[0];
+                contador[2] += 1;
             }
-         
         }
         Primer_evento.Close();
          //Ciclo de guardado de los datos ordenados tipo baraja, primero la fecha y se cuenta el numero de eventos que este tiene 
@@ -314,7 +310,7 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         StreamReader lolcito = File.OpenText(tarea1);
         Primer_evento = File.OpenText(fecha1);
         StreamWriter aiuda = new(path);
-        for (int i = 0; i < contador2; i++)
+        for (int i = 0; i < contador[2]; i++)
         {
             var ase = "";
             if ((ase = Primer_evento.ReadLine()) != null)
@@ -343,12 +339,11 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         driver.Quit();
         //contamos cuantas lineas tiene el documento final ordenado y lo guardamos en una variable 
         StreamReader ola = File.OpenText(path);
-        supercontador = 0;
+        contador[4] = 0;
         while (ola.ReadLine() != null)
         {
-            supercontador += 1;
+            contador[4] += 1;
         }
-        Console.WriteLine(supercontador);
         ola.Close();
         return "a";
     }
@@ -369,8 +364,8 @@ bool revision(string lolo, string chavo,string update)
 {
     //reiniciando los valores d elas variables globales
     tareas_diferencias = "";
-    contador_original = 0;
-    contador_temporal = 0;
+    contador[1] = 0;
+    contador[0] = 0;
     //Dependiendo el caso de la revision envia a la funcion aula la info correspondientee
     if (lolo == path_datosOr)
     {
@@ -387,26 +382,26 @@ bool revision(string lolo, string chavo,string update)
     //se cuenta el numero de lineas del archivo inicial de tareas de aula 
     while (temporalci2.ReadLine() != null)
     {
-        contador_original += 1;
+        contador[1] += 1;
     }
     temporalci2.Close();
     //se cuentan las lienas del nuevo archivo de tareas de aula
     StreamReader temporalci = File.OpenText(chavo);
     while (temporalci.ReadLine() != null)
     {
-        contador_temporal += 1;
+        contador[0] += 1;
     }
     temporalci.Close();
 
     //Si el numero de lineas del nuevo archivo es mayor al numero de lineas original, entonces envio la diferencia de tareas
-    if (contador_temporal > contador_original)
+    if (contador[0] > contador[1])
     {
         //se lee el nuervo archivo y se envian las lineas que tenga este 
         StreamReader aioch = File.OpenText(chavo);
-        for (int j = 0; j < contador_temporal; j++)
+        for (int j = 0; j < contador[0]; j++)
         {
             var gf = "";
-            if (j < contador_original) 
+            if (j < contador[1]) 
             {
                 gf = aioch.ReadLine();
             }
@@ -443,7 +438,7 @@ void direccion_ip()
         var NodoAncho = Node.CssSelect("strong").First();
         texto = NodoAncho.InnerHtml;
     }
-    //lee el archivo de ip que ya teniamos 
+    //lee el archivo de ip que ya teniamos
     StreamReader ipes234 = File.OpenText(path_ip);
     if (ipes234.ToString() != null)
     {
@@ -530,17 +525,18 @@ ProcessStartInfo psi = new()
     FileName = "D:\\Documentos\\Server nuevo\\iniciar.bat"
 };
 //Ciclo infinito de ante busqueda de actualizaciones ( mensajes )
+contador[3] = 0;
 while (true)
 {
     //Un contador de tiempo ya que en cada ciclo tarda 1s pues con un contador de 1 en 1 podemos contar el tiempo en segundos
-    contadorcito++;
+    contador[3]++;
     //si el contador llega a 2 horas se hace una revision automatica
-    if (contadorcito % 7200 == 0)
+    if (contador[3] % 7200 == 0)
     {
         try
         {
             //se reinicia el contador para que vuelva a comenzar
-            contadorcito = 0;
+            contador[3] = 0;
             //si al hacer la revision de aula esta detecta nuevas tareas entra en este caso
             if (revision(path_datosOr, path_datosOrTemp, "000000") == true)
             {
@@ -649,14 +645,14 @@ while (true)
                         {
                             aula(path_datosOrLDI,usuarioLDI,contrasenaLDI,path_fecha_LDI,path_tareas_LDI, update.Message.Chat.Id.ToString());
                             LDI = true;
-                            megacontador = supercontador;
+                            contador[8]= contador[4];
                         }
                         StreamReader aiuda2 = File.OpenText(path_datosOrLDI);
-                        if (megacontador!=0)
+                        if (contador[8]!=0)
                         { 
                             bot.SendMessage(update.Message.Chat.Id, "=============================\n               Tareas detectadas               \n");
 
-                            for (int i = 0; i < megacontador; i++)
+                            for (int i = 0; i < contador[8]; i++)
                             {
                                 var aj = "";
                                 if((aj =aiuda2.ReadLine())!= null){
@@ -723,15 +719,15 @@ while (true)
                         {
                             aula(path_datosOrICI2, usuarioICI2, contrasenaICI2, path_fechas_ici2, path_tareas_ici2, update.Message.Chat.Id.ToString());
                             altiro = true;
-                            conta = supercontador;
+                            contador[9] = contador[4];
                         }
 
                         StreamReader aiu = File.OpenText(path_datosOrICI2);
-                        if (conta!=0)
+                        if (contador[9]!=0)
                         {
                             bot.SendMessage(update.Message.Chat.Id, "=============================\n               Tareas detectadas               \n");
 
-                            for (int i = 0; i < conta; i++)
+                            for (int i = 0; i < contador[9]; i++)
                             {
                                 var ak = "";
                                 if((ak=aiu.ReadLine())!= null)
@@ -798,14 +794,14 @@ while (true)
                         {
                             aula(path_datosOr,usuarioICI, contrasenaICI, path_fecha, path_tareas, update.Message.Chat.Id.ToString());
                             veces = true;
-                            ultracontador = supercontador;
+                            contador[7]= contador[4];
                         }
                         StreamReader aiuda = File.OpenText(path_datosOr);
-                        if (ultracontador!=0)
+                        if (contador[7]!=0)
                         {
                             bot.SendMessage(update.Message.Chat.Id, "=============================\n               Tareas detectadas               \n");
 
-                            for (int i = 0; i < ultracontador; i++)
+                            for (int i = 0; i < contador[7]; i++)
                             {
                                 var ag = "";
                                 if((ag = aiuda.ReadLine())!= null)
