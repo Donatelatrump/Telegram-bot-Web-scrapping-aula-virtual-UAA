@@ -27,7 +27,7 @@ using OpenQA.Selenium.DevTools.V106.Debugger;
 
 
 //Declaracion de variables necesarias, (es posible rutilizar variables )
-int contador_temporal = 0, contador_original = 0, contador2 = 0, contadores = 0, contadorcito = 0, supercontador = 0, saberes = 0, contador_uni = 0, ultracontador=0,megacontador =0,conta=0,sapo=0;
+int contador_temporal = 0, contador_original = 0, contador2 = 0, contadorcito = 0, supercontador = 0, saberes = 0, contador_uni = 0, ultracontador=0,megacontador =0,conta=0,sapo=0;
 string texto2="",lineas="", temporal="", aveces = "", cmp = "", tareas_diferencias = "", texto = "", fechas_aula, fechas_aula2 = "", eventos_aula, fechaderemplazo = "", Admins = "", texto22 = "", fecha_actual = "";
 //Declaracion de las rutas de los archivos que almacenan la informacion (debo encontrar una mejor manera de guardarlo, una manera mas eficiente)
  string direct = Directory.GetCurrentDirectory();
@@ -187,7 +187,6 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
                             FECHa[0] = item2.Text.ToString()[20];
                             FECHa[1] = item2.Text.ToString()[21];
                         }
-
                         //Para miercoles PA
                         if (item2.Text.Contains("miércoles") && item2.Text.Contains("eventos"))
                         {
@@ -296,24 +295,20 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         contador2 = 0;
         while (Primer_evento.ReadLine() != null)
         {
-            contador2++;
+            var xc = "";
+            if ((xc = Primer_evento.ReadLine()) != null)
+            {
+                temporal = xc.ToString();
+            }
+            if(temporal != "")
+            {
+                numeros[contador2] = temporal[0];
+                contador2 += 1;
+            }
+         
         }
         Primer_evento.Close();
-        //Contador de Eventos de las Fechas 
-        StreamReader Primer_evento1 = File.OpenText(fecha1);
-        if (Primer_evento1 != null)
-        {
-            for (int j = 0; j < contador2; j++)
-            {
-                var xc = "";
-                if((xc=Primer_evento1.ReadLine())!= null)
-                {
-                    temporal = xc;
-                }
-                numeros[j] = temporal[0];
-            }
-            Primer_evento1.Close();
-        } //Ciclo de guardado de los datos ordenados tipo baraja, primero la fecha y se cuenta el numero de eventos que este tiene 
+         //Ciclo de guardado de los datos ordenados tipo baraja, primero la fecha y se cuenta el numero de eventos que este tiene 
           //este numero de eventos se envia a un segundo for anidado como parametro y se toman las primeras tareas y asi hasta que el contador de 
           //las fechas lleguen a 0 y los datos esten bien ordenados
         StreamReader lolcito = File.OpenText(tarea1);
@@ -337,9 +332,8 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
                 }
                 aiuda.WriteLine(aveces);
             }
-            contadores += contador2;
         }
-        //se cierran todos los archivos y el metodo de chrome
+        //se cierran todos los archivos y la seesion el aula
         aiuda.Close();
         Primer_evento.Close();
         lolcito.Close();
@@ -354,6 +348,7 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         {
             supercontador += 1;
         }
+        Console.WriteLine(supercontador);
         ola.Close();
         return "a";
     }
@@ -372,10 +367,12 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
 //Funcion para revisar si las tareas que tenemos son las mismas que en la pagina de la uni(basicamente funciona como la funcion de web scrapping pero aqui se revisa 
 bool revision(string lolo, string chavo,string update)
 {
+    //reiniciando los valores d elas variables globales
     tareas_diferencias = "";
     contador_original = 0;
     contador_temporal = 0;
-    if(lolo == path_datosOr)
+    //Dependiendo el caso de la revision envia a la funcion aula la info correspondientee
+    if (lolo == path_datosOr)
     {
         aula(path_datosOrTemp, usuarioICI, contrasenaICI, path_fecha, path_tareas, update);
     }else if(lolo == path_datosOrLDI)
@@ -401,7 +398,7 @@ bool revision(string lolo, string chavo,string update)
     }
     temporalci.Close();
 
-    //Si el numero de lienas del nuevo archivo es menor al numero de lineas del original o mayor
+    //Si el numero de lineas del nuevo archivo es mayor al numero de lineas original, entonces envio la diferencia de tareas
     if (contador_temporal > contador_original)
     {
         //se lee el nuervo archivo y se envian las lineas que tenga este 
@@ -409,15 +406,22 @@ bool revision(string lolo, string chavo,string update)
         for (int j = 0; j < contador_temporal; j++)
         {
             var gf = "";
-            if ((gf = aioch.ReadLine()) != null)
+            if (j < contador_original) 
             {
-                tareas_diferencias += gf;
+                gf = aioch.ReadLine();
             }
+            else
+            {
+                if ((gf = aioch.ReadLine()) != null)
+                {
+                    tareas_diferencias += gf;
+                }
+            }  
         }
         aioch.Close();
     }
     //mientras que el string tareas_diferencias no este vacia (significa que si hubo nuevas tareas)
-    if (tareas_diferencias != "")
+    if (tareas_diferencias != "" || tareas_diferencias != null)
     {
         //se retorna un verdadero que dice que si hubo cambios
         return true;
