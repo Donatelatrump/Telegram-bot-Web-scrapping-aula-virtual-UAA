@@ -28,7 +28,7 @@ using OpenQA.Selenium.DevTools.V106.Debugger;
 
 //Declaracion de variables necesarias
 int[] contador = new int[11];
-string texto2="",lineas="", temporal="", aveces = "", cmp = "", tareas_diferencias = "", texto = "", fechas_aula, fechas_aula2 = "", eventos_aula, fechaderemplazo = "", Admins = "", texto22 = "", fecha_actual = "";
+string texto2="",lineas="", temporal="", aveces = "", cmp = "", tareas_diferencias = "", texto = "", fechas_aula2 = "", fechaderemplazo = "", Admins = "", texto22 = "", fecha_actual = "";
 //Declaracion de las rutas de los archivos que almacenan la informacion (debo encontrar una mejor manera de guardarlo, una manera mas eficiente)
  string direct = Directory.GetCurrentDirectory();
  string path_tareas = direct + "\\Archivos\\Eventos.txt";
@@ -236,61 +236,23 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         //Para el texto de las tareas
         try
         {
-            StreamReader Nanda = File.OpenText(fecha1);
-            StreamReader Even = File.OpenText(tarea1);
-                //Fechas
-                fechas_aula = Nanda.ReadToEnd();
-                Nanda.Close();
-                StreamWriter dayo = new(fecha1);
-                if (fechas_aula2 != "")
-                {
-                    if (fechas_aula != fechas_aula2)
-                    {
-                        dayo.Write(fechas_aula2);
-                        dayo.Close();
-                    }
-                    else
-                    {
-                        dayo.Write(fechas_aula2);
-                        dayo.Close();
-                    }
-                }
-                else
-                {
-                    dayo.Write(fechas_aula);
-                    dayo.Close();
-                }
+            StreamWriter dayo = new(fecha1);
+            dayo.Write(fechas_aula2);
+            dayo.Close();
                 //Eventos
-                fechas_aula2 = "";
-                eventos_aula = Even.ReadToEnd();
-                Even.Close();
-                StreamWriter eventos = new(tarea1);
-                if (texto22 != "")
-                {
-                    if (eventos_aula != texto22)
-                    {
-                        eventos.WriteLine(texto22);
-                        eventos.Close();
-                    }
-                    else
-                    {
-                        eventos.WriteLine(texto22);
-                        eventos.Close();
-                    }
-                }
-                else
-                {
-                    eventos.WriteLine(eventos_aula);
-                    eventos.Close();
-                }
+            fechas_aula2 = "";
+            StreamWriter eventos = new(tarea1);
+            eventos.WriteLine(texto22);
+            eventos.Close();
+                
         }catch(Exception Noabrio)
         {
-            Console.WriteLine("No se pudo abrir uno o ambos archivos de Fechas o Eventos, el codigo de error es \n"+Noabrio);
+            Console.WriteLine("No se pudo abrir o escribir en uno o ambos archivos de Fechas o Eventos, el codigo de error es \n"+Noabrio);
         }
         //Contador de lineas de eventos
         StreamReader Primer_evento = File.OpenText(fecha1);
         contador[2] = 0;
-        while (Primer_evento.ReadLine() != null)
+        while (Primer_evento.ToString() != null)
         {
             var xc = "";
             if ((xc = Primer_evento.ReadLine()) != null)
@@ -329,10 +291,11 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
                 aiuda.WriteLine(aveces);
             }
         }
-        //se cierran todos los archivos y la seesion el aula
+        //se cierran todos los archivos
         aiuda.Close();
         Primer_evento.Close();
         lolcito.Close();
+        //Se cierra la sesion de aula
         var a = driver.FindElement(By.XPath("//*[@id=\"action-menu-0-menu\"]/a[6]"));
         var e = a.GetAttribute("href");
         driver.Navigate().GoToUrl(e);
