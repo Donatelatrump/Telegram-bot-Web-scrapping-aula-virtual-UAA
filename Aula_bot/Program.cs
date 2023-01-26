@@ -138,26 +138,26 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
                         {
                             FECHa[0] = item2.Text.ToString()[17];
                             FECHa[1] = item2.Text.ToString()[18];
-                        }
+                        }else
 
                         //Para Martes Jueves y Sabado PA                                                  
                         if (new[] { "martes", "sábado", "jueves", "evento" }.Any(x => item2.Text.Contains(x)))
                         {
                             FECHa[0] = item2.Text.ToString()[18];
                             FECHa[1] = item2.Text.ToString()[19];
-                        }
+                        }else
                         //Para Miercoles PA
                         if (item2.Text.Contains("miércoles") && item2.Text.Contains("evento"))
                         {
                             FECHa[0] = item2.Text.ToString()[21];
                             FECHa[1] = item2.Text.ToString()[22];
-                        }
+                        }else
                         //Para Viernes y domingo PA
                         if (item2.Text.Contains("viernes") || item2.Text.Contains("domingo") && item2.Text.Contains("evento"))
                         {
                             FECHa[0] = item2.Text.ToString()[19];
                             FECHa[1] = item2.Text.ToString()[20];
-                        }
+                        }else
                         //Para Eventos multiples
                         //Para Martes, Jueves y Sabado PA
                         if (item2.Text.Contains("sábado") && item2.Text.Contains("eventos"))
@@ -165,33 +165,36 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
                             FECHa[0] = item2.Text.ToString()[19];
                             FECHa[1] = item2.Text.ToString()[20];
                         }
+                        
+                        
                         if (new[] { "martes", "lunes", "eventos" }.Any(z => item2.Text.Contains(z)))
                         {
                             FECHa[0] = item2.Text.ToString()[18];
                             FECHa[1] = item2.Text.ToString()[19];
-                        }
+                        }else
                         if (item2.Text.Contains("jueves") && item2.Text.Contains("eventos"))
                         {
                             FECHa[0] = item2.Text.ToString()[19];
                             FECHa[1] = item2.Text.ToString()[20];
-                        }
+                        }else
                         //Para domingo y viernes PA
                         if (item2.Text.Contains("domingo") && item2.Text.Contains("eventos"))
                         {
                             FECHa[0] = item2.Text.ToString()[20];
                             FECHa[1] = item2.Text.ToString()[21];
-                        }
+                        }else
                         if (item2.Text.Contains("viernes") && item2.Text.Contains("eventos"))
                         {
                             FECHa[0] = item2.Text.ToString()[20];
                             FECHa[1] = item2.Text.ToString()[21];
-                        }
+                        }else
                         //Para miercoles PA
                         if (item2.Text.Contains("miércoles") && item2.Text.Contains("eventos"))
                         {
                             FECHa[0] = item2.Text.ToString()[22];
                             FECHa[1] = item2.Text.ToString()[23];
                         }
+                        
                         if (FECHa[0] != ' ')
                         {
                             fechaderemplazo += FECHa[0];
