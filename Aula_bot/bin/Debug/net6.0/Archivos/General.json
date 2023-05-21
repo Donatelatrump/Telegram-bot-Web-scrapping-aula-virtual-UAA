@@ -1,0 +1,53 @@
+{
+  "path_tareas": {
+    "contenido": ""
+  },
+  "path_ip": {
+    "contenido": ""
+  },
+  "path_fecha": {
+    "contenido": ""
+  },
+  "path_suscritos": {
+    "contenido": ""
+  },
+  "path_admins": {
+    "contenido": ""
+  },
+  "path_datosOr": {
+    "contenido": ""
+  },
+  "path_datosOrLDI": {
+    "contenido": ""
+  },
+  "path_datosOrTemp": {
+    "contenido": ""
+  },
+  "path_suscritosLDI": {
+    "contenido": ""
+  },
+  "path_datosOrTempLDI": {
+    "contenido": ""
+  },
+  "path_fecha_LDI": {
+    "contenido": ""
+  },
+  "path_tareas_LDI": {
+    "contenido": ""
+  },
+  "path_tareas_ici2": {
+    "contenido": ""
+  },
+  "path_fechas_ici2": {
+    "contenido": ""
+  },
+  "path_suscritos_ici2": {
+    "contenido": ""
+  },
+  "path_datosOrICI2": {
+    "contenido": ""
+  },
+  "path_datosOrTempICI2": {
+    "contenido": ""
+  }
+}

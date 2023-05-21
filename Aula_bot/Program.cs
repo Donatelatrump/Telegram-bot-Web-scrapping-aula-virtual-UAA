@@ -31,24 +31,24 @@ using CsQuery.ExtensionMethods.Internal;
 int[] contador = new int[11];
 string lineas="", aveces = "", cmp = "", tareas_diferencias = "",  fechas_aula2 = "", Admins = "", texto22 = "", fecha_actual = "";
 //Declaracion de las rutas de los archivos que almacenan la informacion (debo encontrar una mejor manera de guardarlo, una manera mas eficiente)
- string direct = Directory.GetCurrentDirectory();
- string path_tareas = direct + "\\Archivos\\Eventos.txt";
- string path_ip = direct + "\\Archivos\\ips2.txt";
- string path_fecha = direct + "\\Archivos\\Fechas.txt";
- string path_suscritos = direct + "\\Archivos\\Suscritos2.txt";
- string path_admins = direct + "\\Archivos\\Admins.txt";
- string path_datosOr = direct + "\\Archivos\\DatosOr.txt";
- string path_datosOrLDI = direct + "\\Archivos\\DatosOrLDI.txt";
- string path_datosOrTemp = direct + "\\Archivos\\DatosOrTemp.txt";
- string path_suscritosLDI = direct + "\\Archivos\\SuscritosLDI.txt";
- string path_datosOrTempLDI = direct + "\\Archivos\\DatosOrTempLDI.txt";
- string path_fecha_LDI = direct + "\\Archivos\\Fechas_LDI.txt";
- string path_tareas_LDI = direct + "\\Archivos\\Eventos_LDI.txt";
- string path_tareas_ici2 = direct + "\\Archivos\\EventosICI2.txt";
- string path_fechas_ici2 = direct + "\\Archivos\\FechasICI2.txt";
- string path_suscritos_ici2 = direct + "\\Archivos\\SuscritosICI2.txt";
- string path_datosOrICI2 = direct + "\\Archivos\\DatosOrICI2.txt";
- string path_datosOrTempICI2 = direct + "\\Archivos\\DatosOrTempICI2.txt";
+string direct = Directory.GetCurrentDirectory();
+string path_tareas = Path.Combine(direct, "Archivos", "Eventos.txt");
+string path_ip = Path.Combine(direct, "Archivos", "ips2.txt");
+string path_fecha = Path.Combine(direct, "Archivos", "Fechas.txt");
+string path_suscritos = Path.Combine(direct, "Archivos", "Suscritos2.txt");
+string path_admins = Path.Combine(direct, "Archivos", "Admins.txt");
+string path_datosOr = Path.Combine(direct, "Archivos", "DatosOr.txt");
+string path_datosOrLDI = Path.Combine(direct, "Archivos", "DatosOrLDI.txt");
+string path_datosOrTemp = Path.Combine(direct, "Archivos", "DatosOrTemp.txt");
+string path_suscritosLDI = Path.Combine(direct, "Archivos", "SuscritosLDI.txt");
+string path_datosOrTempLDI = Path.Combine(direct, "Archivos", "DatosOrTempLDI.txt");
+string path_fecha_LDI = Path.Combine(direct, "Archivos", "Fechas_LDI.txt");
+string path_tareas_LDI = Path.Combine(direct, "Archivos", "Eventos_LDI.txt");
+string path_tareas_ici2 = Path.Combine(direct, "Archivos", "EventosICI2.txt");
+string path_fechas_ici2 = Path.Combine(direct, "Archivos", "FechasICI2.txt");
+string path_suscritos_ici2 = Path.Combine(direct, "Archivos", "SuscritosICI2.txt");
+string path_datosOrICI2 = Path.Combine(direct, "Archivos", "DatosOrICI2.txt");
+string path_datosOrTempICI2 = Path.Combine(direct, "Archivos", "DatosOrTempICI2.txt");
 //Variables de acceso a la pagina de la Uni
 string usuarioICI = "al283189", usuarioLDI = "al263887", usuarioICI2 = "al261731";
 string contrasenaICI = "Sayulita0506", contrasenaLDI = "Wera060102", contrasenaICI2 = "SPjl3490";
@@ -62,21 +62,21 @@ var updates = bot.GetUpdates();
 //Funcion para detectar programas activos en windows -> en este caso detecta minecraft para evitar que el bot se cierre mientras el usuario juega
 DateTime thisDay = DateTime.Today;
 //Funcion de web scrapping para sacar las tareas y fechas de la uni dependiendo de que carrera sea
-string aula(string path, string Usuario, string Password2, string fecha1,string tarea1,string update)
+string aula(string path, string Usuario, string Password2, string fecha1, string tarea1, string update)
 {
     contador[5] = 0;
     contador[6] = 0;
     contador[10] = 0;
     texto22 = "";
-    string dia="";
-    //Tomar solo los dias de la fecha actual 
-    fecha[0] = thisDay.ToString()[0];
-    fecha[1] = thisDay.ToString()[1];
-    fecha_actual = new string(fecha);
-    //Abrir chomre en aula y enviarle los datos de acceso 
+    string dia = "";
+
+    fecha_actual = thisDay.ToString("dd");
+
     IWebDriver driver = new ChromeDriver();
-   driver.Manage().Window.Minimize();
-    try { 
+    driver.Manage().Window.Minimize();
+
+    try
+    {
         driver.Navigate().GoToUrl("https://aulavirtual.uaa.mx/login/index.php");
         var user = driver.FindElement(By.Name("username"));
         user.SendKeys(Usuario);
@@ -84,105 +84,92 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
         contra.SendKeys(Password2);
         contra.Submit();
         driver.Navigate().GoToUrl("https://aulavirtual.uaa.mx/calendar/view.php?view=month");
-    } catch(Exception inter) { Console.WriteLine(inter);
+    }
+    catch (Exception inter)
+    {
+        Console.WriteLine(inter);
         try
         {
-            bot.SendMessage(update, "Aula esta caido");
+            bot.SendMessage(update, "Aula está caído");
             bot.SendAnimation(update, "https://i.pinimg.com/originals/d1/d6/c0/d1d6c0fe9c91839b97e361387b505b97.gif");
         }
-        catch(Exception ar)
+        catch (Exception ar)
         {
-            Console.WriteLine("No pudimos conectarnos con el remitente\n"+ar);
+            Console.WriteLine("No se pudo conectarse con el remitente\n" + ar);
         }
         driver.Quit();
         return "a";
     }
-    //Despues de ingresar dirigirse a la pagina de calendario
+
     if (driver.Url == "https://aulavirtual.uaa.mx/calendar/view.php?view=month")
     {
-        //Con esta variable tomar todos los nombres de las tareas 
         var numero_de_tareas = driver.FindElements(By.ClassName("eventname"));
-        //Con esta variable tomar todas las fechas que tengan una tarea en su interior
         var fecha_tareas = driver.FindElements(By.ClassName("sr-only"));
-        //Consigue y limpia todas las tareas
+
         foreach (var item2 in fecha_tareas)
         {
-            if (item2.Text.ToString().Length != 0)
+            if (item2.Text.Length != 0)
             {
-                if (contador[10] == 40) //Condicional para que no de vueltas de mas inecesarias
+                if (contador[10] == 40)
                 {
-                    break; //Para romper el foreach
+                    break;
                 }
                 if (!item2.Text.Contains("Sin eventos") && !item2.Text.Contains("Omitir"))
                 {
-                    if (new[] { '1', '2', '3', '4', '5', '6', '7', '8', '9' }.Any(x => item2.Text.Contains(x)))
+                    if (item2.Text.Any(x => char.IsDigit(x)))
                     {
-
                         string[] partes = item2.Text.Split(',');
-
 
                         if (partes.Length >= 3)
                         {
                             string fecha = partes[2].Trim();
-
-
                             string[] fechaPartes = fecha.Split(' ');
                             if (fechaPartes.Length >= 2)
                             {
                                 dia = fechaPartes[^2];
                             }
-                        } 
-                        if (Int32.Parse(dia) >= Int32.Parse(fecha_actual))
+                        }
+
+                        if (int.Parse(dia) >= int.Parse(fecha_actual))
                         {
-                            fechas_aula2 += item2.Text+ "\n";
+                            fechas_aula2 += item2.Text + "\n";
                         }
                         else
                         {
-                            FECHa[2] = item2.Text[0];
-                            contador[5]+= Int32.Parse(FECHa[2].ToString());
+                            contador[5] += int.Parse(item2.Text[0].ToString());
                         }
                     }
-
                 }
-                contador[10]+=1;
+                contador[10] += 1;
             }
         }
         contador[10] = 0;
-        
+
         foreach (var item in numero_de_tareas)
         {
-
-                if (!item.Text.Contains("Ocultar"))
-                {
+            if (!item.Text.Contains("Ocultar"))
+            {
                 contador[6] += 1;
-                //Decirle que mientras el contador de las tareas leidas sea mayor al contador de fechas ignoradas debe seguir leyendo tareas
                 if (contador[6] > contador[5])
-                    {
-                    texto22 += item.Text.ToString() + "\n";
-                    }
+                {
+                    texto22 += item.Text + "\n";
+                }
             }
         }
-        //Para el texto de las tareas
+
         try
         {
-            StreamWriter dayo = new(fecha1);
-            dayo.Write(fechas_aula2);
-            dayo.Close();
-            // Eventos
-            fechas_aula2 = "";
-            StreamWriter eventos = new(tarea1);
-            eventos.WriteLine(texto22);
-            eventos.Close();
+            File.WriteAllText(fecha1, fechas_aula2);
+            File.WriteAllText(tarea1, texto22);
         }
         catch (Exception Noabrio)
         {
             Console.WriteLine("No se pudo abrir o escribir en uno o ambos archivos de Fechas o Eventos, el código de error es:\n" + Noabrio);
         }
 
-        // Contador de líneas de eventos
         StreamReader Primer_evento = File.OpenText(fecha1);
         contador[2] = 0;
-        string temporal = Primer_evento.ReadLine(); // Leer la primera línea
+        string temporal = Primer_evento.ReadLine();
         while (temporal != null)
         {
             if (!string.IsNullOrEmpty(temporal))
@@ -190,14 +177,14 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
                 numeros[contador[2]] = temporal[0];
                 contador[2] += 1;
             }
-            temporal = Primer_evento.ReadLine(); // Leer la siguiente línea
+            temporal = Primer_evento.ReadLine();
         }
         Primer_evento.Close();
-
 
         StreamReader lolcito = File.OpenText(tarea1);
         Primer_evento = File.OpenText(fecha1);
         StreamWriter aiuda = new(path);
+
         for (int i = 0; i < contador[2]; i++)
         {
             var ase = "";
@@ -217,16 +204,16 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
                 aiuda.WriteLine(aveces);
             }
         }
-        //se cierran todos los archivos
+
         aiuda.Close();
         Primer_evento.Close();
         lolcito.Close();
-        //Se cierra la sesion de aula
+
         var a = driver.FindElement(By.XPath("//*[@id=\"action-menu-0-menu\"]/a[6]"));
         var e = a.GetAttribute("href");
         driver.Navigate().GoToUrl(e);
         driver.Quit();
-        //contamos cuantas lineas tiene el documento final ordenado y lo guardamos en una variable 
+
         StreamReader ola = File.OpenText(path);
         contador[4] = 0;
         while (ola.ReadLine() != null)
@@ -240,10 +227,11 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
     {
         try
         {
-            bot.SendMessage(update, "Al parecer alguna de nuestros accesos esta caido, reportalo con el desarrollador por favor :3");
-        }catch(Exception al)
+            bot.SendMessage(update, "Al parecer alguno de nuestros accesos está caído, repórtalo con el desarrollador por favor :3");
+        }
+        catch (Exception al)
         {
-            Console.WriteLine("No se pudo encontrar al destinatario\n"+al);
+            Console.WriteLine("No se pudo encontrar al destinatario\n" + al);
         }
         return "a";
     }
@@ -252,8 +240,8 @@ string aula(string path, string Usuario, string Password2, string fecha1,string 
 bool revision(string lolo, string chavo, string update)
 {
     tareas_diferencias = "";
-    contador[1] = File.ReadAllLines(lolo).Length;
-    contador[0] = File.ReadAllLines(chavo).Length;
+    contador[1] = File.ReadLines(lolo).Count();
+    contador[0] = File.ReadLines(chavo).Count();
 
     // Llamada a la función aula según el caso de revisión
     if (lolo == path_datosOr)
@@ -287,56 +275,64 @@ bool revision(string lolo, string chavo, string update)
 //Lee las personas o sus chat Id que poseen permisos elevados para poder usar el bot
 void archivitos()
 {
-    //lee los id chat del documento administradores
-    StreamReader Administradores;
-    Administradores = File.OpenText(path_admins);
-    if (Administradores.ToString() != null)
+    // Lee los id chat del documento administradores
+    if (File.Exists(path_admins))
     {
-        var fz = "";
-        if ((fz = Administradores.ReadLine()) != null)
+        using StreamReader Administradores = File.OpenText(path_admins);
+        var fz = Administradores.ReadLine();
+        if (fz != null)
         {
             Admins = fz;
         }
-        Administradores.Close();
-    }
-    else
-    {
-        Administradores.Close();
     }
 }
 //Guarda las suscripciones en sus debidos archivos para tener ese almacenaje
-void suscritos(String datos,string path)
+void suscritos(string datos, string path)
 {
     cmp = "";
-    //se lee si hay datos en el archivo
-    StreamReader lectura21 = File.OpenText(path);
-    if (lectura21.ToString() != null)
+    verdad = false;
+
+    if (File.Exists(path))
     {
-        cmp = lectura21.ReadToEnd();
+        cmp = File.ReadAllText(path);
         verdad = true;
-        lectura21.Close();
     }
-    else
+
+    using StreamWriter suscritos = new(path);
+    if (verdad)
     {
-        verdad = false;
-        lectura21.Close();
+        suscritos.Write(cmp);
     }
-    StreamWriter suscritos = new(path);
-    //si no se encuentran datos en el archivo pues los nuevos datos remplazan a todo lo que contenga el archivo
-    if (verdad == false)
-    {
-        suscritos.WriteLine(datos);
-        suscritos.Close();
-    }
-    else
-    {
-        //si si encontro datos estos se toman y se concatenan
-        suscritos.WriteLine(cmp + datos);
-        suscritos.Close();
-    }
+    suscritos.Write(datos);
 }
 //Funcion para Inicar un programa .exe o .bat , en este caso para iniciar el servidor de Minecraft
 //Ciclo infinito de ante busqueda de actualizaciones ( mensajes )
+
+void EnviarNuevasTareas()
+{
+    string[] pathDatosOrList = { path_datosOr, path_datosOrLDI, path_datosOrICI2 };
+    string[] pathDatosOrTempList = { path_datosOrTemp, path_datosOrTempLDI, path_datosOrTempICI2 };
+    string[] suscritosPaths = { path_suscritos, path_suscritosLDI, path_suscritos_ici2 };
+
+    for (int i = 0; i < pathDatosOrList.Length; i++)
+    {
+        string pathDatosOr = pathDatosOrList[i];
+        string pathDatosOrTemp = pathDatosOrTempList[i];
+        string suscritosPath = suscritosPaths[i];
+
+        if (revision(pathDatosOr, pathDatosOrTemp, "000000"))
+        {
+            using StreamReader lectura = File.OpenText(suscritosPath);
+            string tem;
+            while ((tem = lectura.ReadLine()) != null)
+            {
+                bot.SendMessage(chatId: tem, text: tareas_diferencias);
+            }
+        }
+    }
+}
+
+
 contador[3] = 0;
 while (true)
 {
@@ -350,59 +346,13 @@ while (true)
         {
             try
             {
-                //se reinicia el contador para que vuelva a comenzar
+                // se reinicia el contador para que vuelva a comenzar
                 contador[3] = 0;
-                //si al hacer la revision de aula esta detecta nuevas tareas entra en este caso
-                if (revision(path_datosOr, path_datosOrTemp, "000000") == true)
-                {
-                    StreamReader lectura3 = File.OpenText(path_suscritos);
-                    //se leen todos los usuarios registrados y se les envia las nuevas tareas detectadas
-                    while (lectura3.ToString() != null)
-                    {
-                        var tem = "";//al hacer esto quitamos los avisos de posible null
-                        if ((tem = lectura3.ReadLine()) != null)
-                        {
-                            bot.SendMessage(chatId: tem, text: tareas_diferencias);
-                        }
-                    }
-                    lectura3.Close();
-                }
-                if (revision(path_datosOrLDI, path_datosOrTempLDI, "000000") == true)
-                {
-                    StreamReader lectura3 = File.OpenText(path_suscritosLDI);
-                    //se leen todos los usuarios registrados y se les envia las nuevas tareas detectadas
-                    while (lectura3.ToString() != null)
-                    {
-                        var tema = "";//al hacer esto quitamos los avisos de posible null
-                        if ((tema = lectura3.ReadLine()) != null)
-                        {
-                            bot.SendMessage(chatId: tema, text: tareas_diferencias);
-                        }
-                    }
-                    lectura3.Close();
-                }
-                if (revision(path_datosOrICI2, path_datosOrTempICI2, "000000") == true)
-                {
-                    StreamReader lectura3 = File.OpenText(path_suscritos_ici2);
-                    //se leen todos los usuarios registrados y se les envia las nuevas tareas detectadas
-                    while (lectura3.ToString() != null)
-                    {
-                        var hg = "";//al hacer esto quitamos los avisos de posible null
-                        if ((hg = lectura3.ReadLine()) != null)
-                        {
-                            bot.SendMessage(chatId: hg, text: tareas_diferencias);
-                        }
-                    }
-                    lectura3.Close();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Fallo la revision automatica, codigo de error:\n" + e);
-            }
+                EnviarNuevasTareas();
+            } catch (Exception e) { Console.WriteLine("Fallo la revisión automática, código de error:\n" + e); }
         });
-      
     }
+         
     //si el contador aun no llega al tiempo de 2 horas se pasa directamente a la comprobacion de mensajes 
     if (updates.Length > 0)
     {
@@ -670,7 +620,18 @@ while (true)
                     case "/start":
                         Task.Run(() =>
                         {
-                            bot.SendMessage(update.Message.Chat.Id, "Hola yo soy un bot de ayuda con el recordatorio y vista de las tareas de aula virtual\nPor el momento soy una beta pero espero que con tu ayuda\nPueda mejorar para facilitarte el recordatorio de tus tareas\n Y proximamente añadir mas cosas útiles :)");
+                            bot.SendMessage(update.Message.Chat.Id, "🤖 **¡Bienvenido al Bot de Tareas!** 📚\n\n" +
+                                        "ℹ️ A continuación, encontrarás una lista de comandos disponibles:\n\n" +
+                                        "➡️ /start - Pequeña presentación del bot\n\n" +
+                                        "➡️ /cmp_LDI - Compara manualmente las tareas de aula de la carrera de LDI\n\n" +
+                                        "➡️ /aula_LDI - Consulta las tareas activas para la carrera de LDI\n\n" +
+                                        "➡️ /Suscribirme_LDI - Recibe notificaciones sobre nuevas tareas para LDI\n\n" +
+                                        "➡️ /cmp_ICI - Compara manualmente las tareas de aula de la carrera de ICI\n\n" +
+                                        "➡️ /aula_ICI - Consulta las tareas activas para la carrera de ICI\n\n" +
+                                        "➡️ /Suscribirme_ICI - Recibe notificaciones sobre nuevas tareas para ICI\n\n" +
+                                        "➡️ /cmp_ICI2 - Compara manualmente las tareas de aula de la carrera de ICI\n\n" +
+                                        "➡️ /aula_ICI2 - Consulta las tareas activas para la carrera de ICI\n\n" +
+                                        "➡️ /Suscribirme_ICI2 - Recibe notificaciones sobre nuevas tareas para ICI\n\n");
                             bot.SendAnimation(update.Message.Chat.Id, "http://68.media.tumblr.com/0c6c24139702399121af533ab6011237/tumblr_oqcj9ycnPO1w46s3lo1_540.gif");
 
                         });
