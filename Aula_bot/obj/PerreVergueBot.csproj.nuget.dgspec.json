@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\donne\\proyecto\\Aula_bot\\PerreVergueBot.csproj": {}
+    "D:\\Documentos\\Trabajos\\Telegram\\Aula_bot\\PerreVergueBot.csproj": {}
   },
   "projects": {
-    "C:\\Users\\donne\\proyecto\\Aula_bot\\PerreVergueBot.csproj": {
+    "D:\\Documentos\\Trabajos\\Telegram\\Aula_bot\\PerreVergueBot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\donne\\proyecto\\Aula_bot\\PerreVergueBot.csproj",
+        "projectUniqueName": "D:\\Documentos\\Trabajos\\Telegram\\Aula_bot\\PerreVergueBot.csproj",
         "projectName": "PerreVergueBot",
-        "projectPath": "C:\\Users\\donne\\proyecto\\Aula_bot\\PerreVergueBot.csproj",
+        "projectPath": "D:\\Documentos\\Trabajos\\Telegram\\Aula_bot\\PerreVergueBot.csproj",
         "packagesPath": "C:\\Users\\donne\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\donne\\proyecto\\Aula_bot\\obj\\",
+        "outputPath": "D:\\Documentos\\Trabajos\\Telegram\\Aula_bot\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "E:\\Idles\\Sdk del visual studio feo\\NuGetPackages"
+          "E:\\Visual studio\\cosas\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\donne\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -63,15 +62,15 @@
             },
             "Selenium.Support": {
               "target": "Package",
-              "version": "[4.7.0, )"
+              "version": "[4.9.1, )"
             },
             "Selenium.WebDriver.ChromeDriver": {
               "target": "Package",
-              "version": "[108.0.5359.7100, )"
+              "version": "[113.0.5672.6300, )"
             },
             "Telegram.BotAPI": {
               "target": "Package",
-              "version": "[6.3.0, )"
+              "version": "[6.7.1, )"
             }
           },
           "imports": [
@@ -90,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

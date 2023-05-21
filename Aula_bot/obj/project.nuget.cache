@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ByclsqxRkDRC7yJOgSQOG/EhFm5wRZE+CNPJjA2GW46NjHzP/ctZTzuwZHkIIf/cextYTNMaVwJc8QUJGV0t1g==",
+  "dgSpecHash": "09UXHe1WfFU0qrOQ7vJzDoupnaKUkplUCx1GCd+vslY703CNRmNBFCkyhd/+0WEgauwpPovTohfC+Sr0nG8raA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\donne\\proyecto\\Aula_bot\\PerreVergueBot.csproj",
+  "projectFilePath": "D:\\Documentos\\Trabajos\\Telegram\\Aula_bot\\PerreVergueBot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\donne\\.nuget\\packages\\csquery.netstandard\\1.3.6.1\\csquery.netstandard.1.3.6.1.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\fsharp.core\\4.5.2\\fsharp.core.4.5.2.nupkg.sha512",
@@ -24,16 +24,16 @@
     "C:\\Users\\donne\\.nuget\\packages\\microsoft.netcore.windows.apisets\\1.0.1\\microsoft.netcore.windows.apisets.1.0.1.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\microsoft.win32.primitives\\4.0.1\\microsoft.win32.primitives.4.0.1.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\netstandard.library\\1.6.0\\netstandard.library.1.6.0.nupkg.sha512",
-    "C:\\Users\\donne\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\donne\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\runtime.native.system\\4.0.0\\runtime.native.system.4.0.0.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\runtime.native.system.io.compression\\4.1.0\\runtime.native.system.io.compression.4.1.0.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\runtime.native.system.net.http\\4.0.1\\runtime.native.system.net.http.4.0.1.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\runtime.native.system.security.cryptography\\4.0.0\\runtime.native.system.security.cryptography.4.0.0.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\scrappynetstandard\\0.1.0\\scrappynetstandard.0.1.0.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\scrapysharp\\3.0.0\\scrapysharp.3.0.0.nupkg.sha512",
-    "C:\\Users\\donne\\.nuget\\packages\\selenium.support\\4.7.0\\selenium.support.4.7.0.nupkg.sha512",
-    "C:\\Users\\donne\\.nuget\\packages\\selenium.webdriver\\4.7.0\\selenium.webdriver.4.7.0.nupkg.sha512",
-    "C:\\Users\\donne\\.nuget\\packages\\selenium.webdriver.chromedriver\\108.0.5359.7100\\selenium.webdriver.chromedriver.108.0.5359.7100.nupkg.sha512",
+    "C:\\Users\\donne\\.nuget\\packages\\selenium.support\\4.9.1\\selenium.support.4.9.1.nupkg.sha512",
+    "C:\\Users\\donne\\.nuget\\packages\\selenium.webdriver\\4.9.1\\selenium.webdriver.4.9.1.nupkg.sha512",
+    "C:\\Users\\donne\\.nuget\\packages\\selenium.webdriver.chromedriver\\113.0.5672.6300\\selenium.webdriver.chromedriver.113.0.5672.6300.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\system.appcontext\\4.1.0\\system.appcontext.4.1.0.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\system.buffers\\4.0.0\\system.buffers.4.0.0.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\system.collections\\4.0.11\\system.collections.4.0.11.nupkg.sha512",
@@ -91,7 +91,7 @@
     "C:\\Users\\donne\\.nuget\\packages\\system.text.encoding.codepages\\4.0.1\\system.text.encoding.codepages.4.0.1.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\system.text.encoding.extensions\\4.0.11\\system.text.encoding.extensions.4.0.11.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
-    "C:\\Users\\donne\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
+    "C:\\Users\\donne\\.nuget\\packages\\system.text.json\\7.0.2\\system.text.json.7.0.2.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\system.text.regularexpressions\\4.1.0\\system.text.regularexpressions.4.1.0.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\system.threading\\4.0.11\\system.threading.4.0.11.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\system.threading.tasks\\4.0.11\\system.threading.tasks.4.0.11.nupkg.sha512",
@@ -102,7 +102,7 @@
     "C:\\Users\\donne\\.nuget\\packages\\system.xml.xmldocument\\4.0.1\\system.xml.xmldocument.4.0.1.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\system.xml.xpath\\4.0.1\\system.xml.xpath.4.0.1.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\system.xml.xpath.xmldocument\\4.0.1\\system.xml.xpath.xmldocument.4.0.1.nupkg.sha512",
-    "C:\\Users\\donne\\.nuget\\packages\\telegram.botapi\\6.3.0\\telegram.botapi.6.3.0.nupkg.sha512"
+    "C:\\Users\\donne\\.nuget\\packages\\telegram.botapi\\6.7.1\\telegram.botapi.6.7.1.nupkg.sha512"
   ],
   "logs": []
 }
