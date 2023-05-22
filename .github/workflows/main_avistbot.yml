@@ -23,7 +23,7 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release --project ${{ github.workspace }}/PerreVergueBot.csproj
+        run: dotnet build --configuration Release --project D:\a\Telegram-bot-Web-scrapping-aula-virtual-UAA\Telegram-bot-Web-scrapping-aula-virtual-UAA\PerreVergueBot.csproj
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/Aula_bot
