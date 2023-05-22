@@ -21,17 +21,15 @@ jobs:
 
       - name: Build with dotnet
         run: dotnet build --configuration Release Aula_bot/PerreVergueBot.csproj
+- name: dotnet publish
+  run: |
+    dotnet publish -c Release -o Donatelatrump/Telegram-bot-Web-scrapping-aula-virtual-UAA/Aula_bot/PerreVergueBot.csproj
 
-      - name: dotnet publish
-        run: |
-
-          dotnet publish -c Release -o  Donatelatrump/Telegram-bot-Web-scrapping-aula-virtual-UAA/Aula_bot/PerreVergueBot.sln
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: .net-app
-          path: Donatelatrump/Telegram-bot-Web-scrapping-aula-virtual-UAA/Aula_bot/PerreVergueBot.sln
+- name: Upload artifact for deployment job
+  uses: actions/upload-artifact@v2
+  with:
+    name: .net-app
+    path: Donatelatrump/Telegram-bot-Web-scrapping-aula-virtual-UAA/Aula_bot/PerreVergueBot
   deploy:
     runs-on: windows-latest
     needs: build
