@@ -23,7 +23,7 @@ jobs:
         run: dotnet build --configuration Release Aula_bot/PerreVergueBot.csproj
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o Aula_bot/PerreVergueBot.sln
+        run: dotnet publish -c Release  Aula_bot/PerreVergueBot.csproj
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
