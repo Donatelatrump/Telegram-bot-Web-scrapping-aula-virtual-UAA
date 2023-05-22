@@ -23,7 +23,7 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet run --configuration Release Donatelatrump/Telegram-bot-Web-scrapping-aula-virtual-UAA/Aula_bot/PerreVergueBot.csproj
+        run: dotnet run --configuration Release Donatelatrump/Telegram-bot-Web-scrapping-aula-virtual-UAA/Aula_bot/
         
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
