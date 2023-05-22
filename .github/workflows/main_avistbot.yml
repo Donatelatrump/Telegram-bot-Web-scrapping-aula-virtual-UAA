@@ -23,10 +23,10 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet run --configuration Release --project D:\a\Telegram-bot-Web-scrapping-aula-virtual-UAA\Telegram-bot-Web-scrapping-aula-virtual-UAA\PerreVergueBot.csproj
+        run: dotnet build  D:\a\Telegram-bot-Web-scrapping-aula-virtual-UAA\Telegram-bot-Web-scrapping-aula-virtual-UAA\PerreVergueBot.csproj
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/Aula_bot
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
