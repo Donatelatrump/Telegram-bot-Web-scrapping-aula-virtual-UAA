@@ -24,7 +24,6 @@ jobs:
 
       - name: dotnet publish
         run: |
-          cd Donatelatrump/Telegram-bot-Web-scrapping-aula-virtual-UAA/Aula_bot
           dotnet publish -c Release -o PerreVergueBot
 
       - name: Upload artifact for deployment job
