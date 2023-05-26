@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\donne\\Source\\Repos\\Donatelatrump\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula bot\\PerreVergueBot.csproj": {}
+    "D:\\Documentos\\Bots\\Telegram\\Aula bot\\PerreVergueBot.csproj": {}
   },
   "projects": {
-    "C:\\Users\\donne\\Source\\Repos\\Donatelatrump\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula bot\\PerreVergueBot.csproj": {
+    "D:\\Documentos\\Bots\\Telegram\\Aula bot\\PerreVergueBot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\donne\\Source\\Repos\\Donatelatrump\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula bot\\PerreVergueBot.csproj",
+        "projectUniqueName": "D:\\Documentos\\Bots\\Telegram\\Aula bot\\PerreVergueBot.csproj",
         "projectName": "PerreVergueBot",
-        "projectPath": "C:\\Users\\donne\\Source\\Repos\\Donatelatrump\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula bot\\PerreVergueBot.csproj",
+        "projectPath": "D:\\Documentos\\Bots\\Telegram\\Aula bot\\PerreVergueBot.csproj",
         "packagesPath": "C:\\Users\\donne\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\donne\\Source\\Repos\\Donatelatrump\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula bot\\obj\\",
+        "outputPath": "D:\\Documentos\\Bots\\Telegram\\Aula bot\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "E:\\Idles\\Sdk del visual studio feo\\NuGetPackages"
+          "D:\\Aplicaciones\\Microsoft Visual Studio\\Componentes\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\donne\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -59,15 +59,15 @@
             },
             "Selenium.Support": {
               "target": "Package",
-              "version": "[4.5.1, )"
+              "version": "[4.9.1, )"
             },
             "Selenium.WebDriver.ChromeDriver": {
               "target": "Package",
-              "version": "[106.0.5249.6100, )"
+              "version": "[113.0.5672.6300, )"
             },
             "Telegram.BotAPI": {
               "target": "Package",
-              "version": "[6.2.0, )"
+              "version": "[6.7.1, )"
             }
           },
           "imports": [
@@ -86,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
