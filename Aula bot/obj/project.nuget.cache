@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yKW4wh/4iWNeCXMHIJRw229p7RGKw4qLruhnanczugafcweQEf4+nAVQl7MvudZEWIzI3lf6DUn1T7mFBJ3SQQ==",
+  "dgSpecHash": "Q+JL/3tozJ5SsoSQOqKzntGvuwKIF9c9bHdoI19oOoN4kF/Nks1xqijyXh9c3lajFlHty9yRHGRPbX5MV18C9g==",
   "success": true,
-  "projectFilePath": "D:\\Documentos\\Bots\\Telegram\\Aula bot\\PerreVergueBot.csproj",
+  "projectFilePath": "D:\\Documentos\\Trabajos\\Telegram\\Aula bot\\PerreVergueBot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\donne\\.nuget\\packages\\csquery.netstandard\\1.3.6.1\\csquery.netstandard.1.3.6.1.nupkg.sha512",
     "C:\\Users\\donne\\.nuget\\packages\\fsharp.core\\4.5.2\\fsharp.core.4.5.2.nupkg.sha512",
