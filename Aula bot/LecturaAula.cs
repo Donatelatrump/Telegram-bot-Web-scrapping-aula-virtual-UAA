@@ -14,9 +14,7 @@ namespace PerreVergueBot
 {
     internal class LecturaAula
     {
-        //Funcion de web scrapping para sacar las tareas y fechas de la uni dependiendo de que carrera sea
-        //Funcion para revisar si las tareas que tenemos son las mismas que en la pagina de la uni(basicamente funciona como la funcion de web scrapping pero aqui se revisa 
-
+ 
         public static string Aula(string path, string Usuario, string Password2, string fecha1, string tarea1, string update, BotClient bot)
         {
             int auxiliar = 0,auxiliar2=0;
@@ -205,7 +203,6 @@ namespace PerreVergueBot
                 return "a";
             }
         }
-        //
 
     }
 }

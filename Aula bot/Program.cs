@@ -12,26 +12,6 @@ using PerreVergueBot;
 //Declaracion de variables necesarias
 int[] contador = new int[11];
 string tareas_diferencias = "";
-//Declaracion de las rutas de los archivos que almacenan la informacion (debo encontrar una mejor manera de guardarlo, una manera mas eficiente)
-
- string direct = Directory.GetCurrentDirectory();
-string path_tareas = direct + "\\Archivos\\Eventos.txt";
-string path_ip = direct + "\\Archivos\\ips2.txt";
-string path_fecha = direct + "\\Archivos\\Fechas.txt";
-string path_suscritos = direct + "\\Archivos\\Suscritos2.txt";
-string path_admins = direct + "\\Archivos\\Admins.txt";
-string path_datosOr = direct + "\\Archivos\\DatosOr.txt";
-string path_datosOrLDI = direct + "\\Archivos\\DatosOrLDI.txt";
-string path_datosOrTemp = direct + "\\Archivos\\DatosOrTemp.txt";
-string path_suscritosLDI = direct + "\\Archivos\\SuscritosLDI.txt";
-string path_datosOrTempLDI = direct + "\\Archivos\\DatosOrTempLDI.txt";
-string path_fecha_LDI = direct + "\\Archivos\\Fechas_LDI.txt";
-string path_tareas_LDI = direct + "\\Archivos\\Eventos_LDI.txt";
-string path_tareas_ici2 = direct + "\\Archivos\\EventosICI2.txt";
-string path_fechas_ici2 = direct + "\\Archivos\\FechasICI2.txt";
-string path_suscritos_ici2 = direct + "\\Archivos\\SuscritosICI2.txt";
-string path_datosOrICI2 = direct + "\\Archivos\\DatosOrICI2.txt";
-string path_datosOrTempICI2 = direct + "\\Archivos\\DatosOrTempICI2.txt";
 char[] numeros = new char[100];
 char[] FECHa = new char[3];
 char[] fecha = new char[2];
@@ -42,73 +22,13 @@ var updates = bot.GetUpdates();
 //Funcion para detectar programas activos en windows -> en este caso detecta minecraft para evitar que el bot se cierre mientras el usuario juega
 DateTime thisDay = DateTime.Today;
 //Ciclo infinito de ante busqueda de actualizaciones ( mensajes )
-contador[3] = 0;
+int auxiliar = 0;
 Revision rev = new();
 while (true)
 {
     //Un contador de tiempo ya que en cada ciclo tarda 1s pues con un contador de 1 en 1 podemos contar el tiempo en segundos
-    contador[3]++;
-    //si el contador llega a 2 horas se hace una revision automatica
-
-    if (contador[3] % 7200 == 0)
-    {
-        _ = Task.Run(() =>
-        {
-            try
-            {
-                //se reinicia el contador para que vuelva a comenzar
-                contador[3] = 0;
-                //si al hacer la revision de aula esta detecta nuevas tareas entra en este caso
-                if (rev.Revision1(path_datosOr, path_datosOrTemp, "000000",bot) == true)
-                {
-                    StreamReader lectura3 = File.OpenText(path_suscritos);
-                    //se leen todos los usuarios registrados y se les envia las nuevas tareas detectadas
-                    while (lectura3.ToString() != null)
-                    {
-                        var tem = "";//al hacer esto quitamos los avisos de posible null
-                        if ((tem = lectura3.ReadLine()) != null)
-                        {
-                            bot.SendMessage(chatId: tem, text: tareas_diferencias);
-                        }
-                    }
-                    lectura3.Close();
-                }
-                if (rev.Revision1(path_datosOrLDI, path_datosOrTempLDI, "000000",bot) == true)
-                {
-                    StreamReader lectura3 = File.OpenText(path_suscritosLDI);
-                    //se leen todos los usuarios registrados y se les envia las nuevas tareas detectadas
-                    while (lectura3.ToString() != null)
-                    {
-                        var tema = "";//al hacer esto quitamos los avisos de posible null
-                        if ((tema = lectura3.ReadLine()) != null)
-                        {
-                            bot.SendMessage(chatId: tema, text: tareas_diferencias);
-                        }
-                    }
-                    lectura3.Close();
-                }
-                if (rev.Revision1(path_datosOrICI2, path_datosOrTempICI2, "000000",bot) == true)
-                {
-                    StreamReader lectura3 = File.OpenText(path_suscritos_ici2);
-                    //se leen todos los usuarios registrados y se les envia las nuevas tareas detectadas
-                    while (lectura3.ToString() != null)
-                    {
-                        var hg = "";//al hacer esto quitamos los avisos de posible null
-                        if ((hg = lectura3.ReadLine()) != null)
-                        {
-                            bot.SendMessage(chatId: hg, text: tareas_diferencias);
-                        }
-                    }
-                    lectura3.Close();
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("Fallo la revision automatica, codigo de error:\n" + e);
-            }
-        });
-
-    }
+    auxiliar++;
+ 
     LecturaAula lec = new();
     //si el contador aun no llega al tiempo de 2 horas se pasa directamente a la comprobacion de mensajes 
     if (updates.Length > 0)
@@ -120,6 +40,14 @@ while (true)
             {
                 //lee erl archivo de admins
                 rev.Archivitos();
+                if (auxiliar % 7200 == 0)
+                {
+                    Revision_2horas a = new(bot);
+                    _ = Task.Run(() =>
+                    {
+                        a.Revision_2(update.Message.Chat.Id.ToString());
+                    });
+                }
                 //si el mensaje recibido viene de un administrador entra a un switch si no pasa a otro switch
                 _ = update.Message.Text switch
                 {
@@ -127,7 +55,7 @@ while (true)
                     "/cmp_LDI" => Task.Run(() =>
                                             {
                                                 bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de comparacion manual\n");
-                                                rev .Revision1(path_datosOrLDI, path_datosOrTempLDI, update.Message.Chat.Id.ToString(),bot);
+                                                tareas_diferencias=rev.Revision1(Rutas.path_datosOrLDI, Rutas.path_datosOrTempLDI, update.Message.Chat.Id.ToString(),bot);
                                                 if (tareas_diferencias.Length > 0)
                                                 {
                                                     bot.SendMessage(update.Message.Chat.Id, tareas_diferencias);
@@ -142,11 +70,11 @@ while (true)
                             bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de la captura de los datos!\n");
                             if (LDI != true)
                             {
-                                LecturaAula.Aula(path_datosOrLDI, "al263887", "Wera060102", path_fecha_LDI, path_tareas_LDI, update.Message.Chat.Id.ToString(),bot);
+                                LecturaAula.Aula(Rutas.path_datosOrLDI, "al263887", "Wera060102", Rutas.path_fecha_LDI, Rutas.path_tareas_LDI, update.Message.Chat.Id.ToString(),bot);
                                 LDI = true;
                                 contador[8] = contador[4];
                             }
-                            StreamReader aiuda2 = File.OpenText(path_datosOrLDI);
+                            StreamReader aiuda2 = File.OpenText(Rutas.path_datosOrLDI);
                             if (contador[8] != 0)
                             {
                                 bot.SendMessage(update.Message.Chat.Id, "=============================\n               Tareas detectadas               \n");
@@ -172,13 +100,13 @@ while (true)
                         }),
                     "/Sucribirme_LDI" => Task.Run(() =>
                         {
-                            StreamReader lect2 = new(path_suscritosLDI);
+                            StreamReader lect2 = new(Rutas.path_suscritosLDI);
                             string susc2 = lect2.ReadToEnd();
                             lect2.Close();
-                            StreamReader lau = new(path_suscritos_ici2);
+                            StreamReader lau = new(Rutas.path_suscritos_ici2);
                             string lak = lau.ReadToEnd();
                             lau.Close();
-                            StreamReader iz = new(path_suscritos);
+                            StreamReader iz = new(Rutas.path_suscritos);
                             string h = iz.ReadToEnd();
                             iz.Close();
                             if (susc2.Contains(update.Message.Chat.Id.ToString()))
@@ -196,14 +124,14 @@ while (true)
                             else
                             {
                                 bot.SendMessage(update.Message.Chat.Id, "Listo ya estas suscrito a LDI");
-                                Revision.Suscritos(update.Message.Chat.Id.ToString(), path_suscritosLDI);
+                                Revision.Suscritos(update.Message.Chat.Id.ToString(), Rutas.path_suscritosLDI);
                             }
                         }),
                     //Casos de la segunda mitad de ICI 3er semestre
                     "/cmp_ICI2" => Task.Run(() =>
                                             {
                                                 bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de comparacion manual\n");
-                                                rev.Revision1(path_datosOrICI2, path_datosOrTempICI2, update.Message.Chat.Id.ToString(),bot);
+                                                tareas_diferencias = rev.Revision1(Rutas.path_datosOrICI2, Rutas.path_datosOrTempICI2, update.Message.Chat.Id.ToString(),bot);
                                                 if (tareas_diferencias.Length > 0)
                                                 {
                                                     bot.SendMessage(update.Message.Chat.Id, tareas_diferencias);
@@ -219,12 +147,12 @@ while (true)
 
                             if (altiro != true)
                             {
-                                LecturaAula.Aula(path_datosOrICI2, "al261731", "SPjl3490", path_fechas_ici2, path_tareas_ici2, update.Message.Chat.Id.ToString(), bot);
+                                LecturaAula.Aula(Rutas.path_datosOrICI2, "al261731", "SPjl3490", Rutas.path_fechas_ici2, Rutas.path_tareas_ici2, update.Message.Chat.Id.ToString(), bot);
                                 altiro = true;
                                 contador[9] = contador[4];
                             }
 
-                            StreamReader aiu = File.OpenText(path_datosOrICI2);
+                            StreamReader aiu = File.OpenText(Rutas.path_datosOrICI2);
                             if (contador[9] != 0)
                             {
                                 bot.SendMessage(update.Message.Chat.Id, "=============================\n               Tareas detectadas               \n");
@@ -250,13 +178,13 @@ while (true)
                         }),
                     "/Suscribirme_ICI2" => Task.Run(() =>
                         {
-                            StreamReader lect = new(path_suscritos_ici2);
+                            StreamReader lect = new(Rutas.path_suscritos_ici2);
                             string sus = lect.ReadToEnd();
                             lect.Close();
-                            StreamReader f = new(path_suscritosLDI);
+                            StreamReader f = new(Rutas.path_suscritosLDI);
                             string av = f.ReadToEnd();
                             f.Close();
-                            StreamReader g = new(path_suscritos);
+                            StreamReader g = new(Rutas.path_suscritos);
                             string av2 = g.ReadToEnd();
                             g.Close();
                             if (sus.Contains(update.Message.Chat.Id.ToString()))
@@ -275,14 +203,14 @@ while (true)
                             else
                             {
                                 bot.SendMessage(update.Message.Chat.Id, "Listo ya estas suscrito en ICI2");
-                                Revision.Suscritos(update.Message.Chat.Id.ToString(), path_suscritos_ici2);
+                                Revision.Suscritos(update.Message.Chat.Id.ToString(), Rutas.path_suscritos_ici2);
                             }
                         }),
                     //casos de la carrera de ICI 1ra mitad 3er semestre
                     "/cmp_ICI" => Task.Run(() =>
                                             {
                                                 bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de comparacion manual\n");
-                                                rev.Revision1(path_datosOr, path_datosOrTemp, update.Message.Chat.Id.ToString(),bot);
+                                                tareas_diferencias = rev.Revision1(Rutas.path_datosOr, Rutas.path_datosOrTemp, update.Message.Chat.Id.ToString(),bot);
                                                 if (tareas_diferencias.Length > 0)
                                                 {
                                                     bot.SendMessage(update.Message.Chat.Id, tareas_diferencias);
@@ -298,11 +226,11 @@ while (true)
 
                             if (veces != true)
                             {
-                                LecturaAula.Aula(path_datosOr, "al283189", "Sayulita0506", path_fecha, path_tareas, update.Message.Chat.Id.ToString(), bot);
+                                LecturaAula.Aula(Rutas.path_datosOr, "al283189", "Sayulita0506", Rutas.path_fecha, Rutas.path_tareas, update.Message.Chat.Id.ToString(), bot);
                                 veces = true;
                                 contador[7] = contador[4];
                             }
-                            StreamReader aiuda = File.OpenText(path_datosOr);
+                            StreamReader aiuda = File.OpenText(Rutas.path_datosOr);
                             if (contador[7] != 0)
                             {
                                 bot.SendMessage(update.Message.Chat.Id, "=============================\n               Tareas detectadas               \n");
@@ -328,13 +256,13 @@ while (true)
                         }),
                     "/Suscribirme_ICI" => Task.Run(() =>
                         {
-                            StreamReader lect34 = new(path_suscritos);
+                            StreamReader lect34 = new(Rutas.path_suscritos);
                             string susc = lect34.ReadToEnd();
                             lect34.Close();
-                            StreamReader o = new(path_suscritosLDI);
+                            StreamReader o = new(Rutas.path_suscritosLDI);
                             string j = o.ReadToEnd();
                             o.Close();
-                            StreamReader l = new(path_suscritos_ici2);
+                            StreamReader l = new(Rutas.path_suscritos_ici2);
                             string n = l.ReadToEnd();
                             l.Close();
                             if (susc.Contains(update.Message.Chat.Id.ToString()))
@@ -352,7 +280,7 @@ while (true)
                             else
                             {
                                 bot.SendMessage(update.Message.Chat.Id, "Listo ya estas suscrito a ICI");
-                                Revision.Suscritos(update.Message.Chat.Id.ToString(), path_suscritos);
+                                Revision.Suscritos(update.Message.Chat.Id.ToString(), Rutas.path_suscritos);
                             }
                         }),
                     "/start" => Task.Run(() =>

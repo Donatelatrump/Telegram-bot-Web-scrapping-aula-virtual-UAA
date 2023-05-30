@@ -1,3 +1,4 @@
+2o Examen Parcial cierra
 Investigación Bootstrap está en fecha de entrega
 Segundo Parcial abre
 Segundo Parcial cierra
@@ -5,4 +6,6 @@ Investigación XAMPP está en fecha de entrega
 Practica 8 está en fecha de entrega
 Practica 1 está en fecha de entrega
 Practica 2 está en fecha de entrega
+Practica 9 está en fecha de entrega
+Practica 10 está en fecha de entrega
 
