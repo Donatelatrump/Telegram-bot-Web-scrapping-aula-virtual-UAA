@@ -8,7 +8,6 @@ using By = OpenQA.Selenium.By;
 using PerreVergueBot;
 
 
-
 //Declaracion de variables necesarias
 int[] contador = new int[11];
 string tareas_diferencias = "";
@@ -39,13 +38,13 @@ while (true)
             if (update.Message != null)
             {
                 //lee erl archivo de admins
-                rev.Archivitos();
+                Revision.Archivitos();
                 if (auxiliar % 7200 == 0)
                 {
-                    Revision_2horas a = new(bot);
+                    Revision_2horas a = new();
                     _ = Task.Run(() =>
                     {
-                        a.Revision_2(update.Message.Chat.Id.ToString());
+                        Revision_2horas.Revision_2(update.Message.Chat.Id.ToString(), bot);
                     });
                 }
                 //si el mensaje recibido viene de un administrador entra a un switch si no pasa a otro switch
@@ -55,7 +54,7 @@ while (true)
                     "/cmp_LDI" => Task.Run(() =>
                                             {
                                                 bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de comparacion manual\n");
-                                                tareas_diferencias=rev.Revision1(Rutas.path_datosOrLDI, Rutas.path_datosOrTempLDI, update.Message.Chat.Id.ToString(),bot);
+                                                tareas_diferencias= Revision.Revision1(Rutas.path_datosOrLDI, Rutas.path_datosOrTempLDI, update.Message.Chat.Id.ToString(),bot);
                                                 if (tareas_diferencias.Length > 0)
                                                 {
                                                     bot.SendMessage(update.Message.Chat.Id, tareas_diferencias);
@@ -70,7 +69,7 @@ while (true)
                             bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de la captura de los datos!\n");
                             if (LDI != true)
                             {
-                                LecturaAula.Aula(Rutas.path_datosOrLDI, "al263887", "Wera060102", Rutas.path_fecha_LDI, Rutas.path_tareas_LDI, update.Message.Chat.Id.ToString(),bot);
+                                lec.Aula(Rutas.path_datosOrLDI, "al263887", "Wera060102", Rutas.path_fecha_LDI, Rutas.path_tareas_LDI, update.Message.Chat.Id.ToString(),bot);
                                 LDI = true;
                                 contador[8] = contador[4];
                             }
@@ -131,7 +130,7 @@ while (true)
                     "/cmp_ICI2" => Task.Run(() =>
                                             {
                                                 bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de comparacion manual\n");
-                                                tareas_diferencias = rev.Revision1(Rutas.path_datosOrICI2, Rutas.path_datosOrTempICI2, update.Message.Chat.Id.ToString(),bot);
+                                                tareas_diferencias = Revision.Revision1(Rutas.path_datosOrICI2, Rutas.path_datosOrTempICI2, update.Message.Chat.Id.ToString(),bot);
                                                 if (tareas_diferencias.Length > 0)
                                                 {
                                                     bot.SendMessage(update.Message.Chat.Id, tareas_diferencias);
@@ -147,7 +146,7 @@ while (true)
 
                             if (altiro != true)
                             {
-                                LecturaAula.Aula(Rutas.path_datosOrICI2, "al261731", "SPjl3490", Rutas.path_fechas_ici2, Rutas.path_tareas_ici2, update.Message.Chat.Id.ToString(), bot);
+                                lec.Aula(Rutas.path_datosOrICI2, "al261731", "SPjl3490", Rutas.path_fechas_ici2, Rutas.path_tareas_ici2, update.Message.Chat.Id.ToString(), bot);
                                 altiro = true;
                                 contador[9] = contador[4];
                             }
@@ -210,7 +209,7 @@ while (true)
                     "/cmp_ICI" => Task.Run(() =>
                                             {
                                                 bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de comparacion manual\n");
-                                                tareas_diferencias = rev.Revision1(Rutas.path_datosOr, Rutas.path_datosOrTemp, update.Message.Chat.Id.ToString(),bot);
+                                                tareas_diferencias = Revision.Revision1(Rutas.path_datosOr, Rutas.path_datosOrTemp, update.Message.Chat.Id.ToString(),bot);
                                                 if (tareas_diferencias.Length > 0)
                                                 {
                                                     bot.SendMessage(update.Message.Chat.Id, tareas_diferencias);
@@ -226,7 +225,7 @@ while (true)
 
                             if (veces != true)
                             {
-                                LecturaAula.Aula(Rutas.path_datosOr, "al283189", "Sayulita0506", Rutas.path_fecha, Rutas.path_tareas, update.Message.Chat.Id.ToString(), bot);
+                                lec.Aula(Rutas.path_datosOr, "al283189", "Sayulita0506", Rutas.path_fecha, Rutas.path_tareas, update.Message.Chat.Id.ToString(), bot);
                                 veces = true;
                                 contador[7] = contador[4];
                             }

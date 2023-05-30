@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Documentos\\Bots\\Telegram\\Aula bot\\PerreVergueBot.csproj": {}
+    "D:\\Documentos\\Trabajos\\Telegram\\Aula bot\\PerreVergueBot.csproj": {}
   },
   "projects": {
-    "D:\\Documentos\\Bots\\Telegram\\Aula bot\\PerreVergueBot.csproj": {
+    "D:\\Documentos\\Trabajos\\Telegram\\Aula bot\\PerreVergueBot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Documentos\\Bots\\Telegram\\Aula bot\\PerreVergueBot.csproj",
+        "projectUniqueName": "D:\\Documentos\\Trabajos\\Telegram\\Aula bot\\PerreVergueBot.csproj",
         "projectName": "PerreVergueBot",
-        "projectPath": "D:\\Documentos\\Bots\\Telegram\\Aula bot\\PerreVergueBot.csproj",
+        "projectPath": "D:\\Documentos\\Trabajos\\Telegram\\Aula bot\\PerreVergueBot.csproj",
         "packagesPath": "C:\\Users\\donne\\.nuget\\packages\\",
-        "outputPath": "D:\\Documentos\\Bots\\Telegram\\Aula bot\\obj\\",
+        "outputPath": "D:\\Documentos\\Trabajos\\Telegram\\Aula bot\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "D:\\Aplicaciones\\Microsoft Visual Studio\\Componentes\\NuGetPackages"
+          "E:\\Visual studio\\cosas\\NuGetPackages"
         ],
         "configFilePaths": [
           "C:\\Users\\donne\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -26,7 +26,6 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -45,9 +44,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "HtmlAgilityPack": {
+            "Microsoft.Extensions.Options": {
               "target": "Package",
-              "version": "[1.11.46, )"
+              "version": "[7.0.1, )"
             },
             "ScrappyNetStandard": {
               "target": "Package",
@@ -86,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

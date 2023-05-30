@@ -4,9 +4,9 @@ namespace PerreVergueBot
     internal class Revision
     {
 
-        public string Revision1(string lolo, string chavo, string update,BotClient bot)
+        public static string Revision1(string lolo, string chavo, string update,BotClient bot)
         {
-            _ = new LecturaAula();
+            LecturaAula lec = new();
             string lin = "";
             int auxiliar = File.ReadAllLines(lolo).Length;
             int auxiliar2 = File.ReadAllLines(chavo).Length;
@@ -14,15 +14,15 @@ namespace PerreVergueBot
             // Llamada a la función aula según el caso de revisión
             if (lolo == Rutas.path_datosOr)
             {
-                LecturaAula.Aula(Rutas.path_datosOrTemp, "al283189", "Sayulita0506", Rutas.path_fecha, Rutas.path_tareas, update, bot);
+                lec.Aula(Rutas.path_datosOrTemp, "al283189", "Sayulita0506", Rutas.path_fecha, Rutas.path_tareas, update, bot);
             }
             else if (lolo == Rutas.path_datosOrLDI)
             {
-                LecturaAula.Aula(Rutas.path_datosOrTempLDI, "al263887", "Wera060102", Rutas.path_fecha_LDI, Rutas.path_tareas_LDI, update, bot);
+                lec.Aula(Rutas.path_datosOrTempLDI, "al263887", "Wera060102", Rutas.path_fecha_LDI, Rutas.path_tareas_LDI, update, bot);
             }
             else if (lolo == Rutas.path_datosOrICI2)
             {
-                LecturaAula.Aula(Rutas.path_datosOrTempICI2, "al261731", "SPjl3490", Rutas.path_fechas_ici2, Rutas.path_tareas_ici2, update, bot);
+                lec.Aula(Rutas.path_datosOrTempICI2, "al261731", "SPjl3490", Rutas.path_fechas_ici2, Rutas.path_tareas_ici2, update, bot);
             }
 
             if (auxiliar2 > auxiliar)
@@ -41,7 +41,7 @@ namespace PerreVergueBot
             return lin;
         }
         //Lee las personas o sus chat Id que poseen permisos elevados para poder usar el bot
-        public string Archivitos()
+        public static string Archivitos()
         {
             string Admins = "";
             //lee los id chat del documento administradores

@@ -221,3 +221,6 @@ D:\Documentos\Trabajos\Telegram\Aula bot\obj\Debug\net6.0\PerreVergueBot.genrunt
 D:\Documentos\Trabajos\Telegram\Aula bot\obj\Debug\net6.0\ref\PerreVergueBot.dll
 D:\Documentos\Trabajos\Telegram\Aula bot\bin\Debug\net6.0\PerreVergueBot.dll.config
 D:\Documentos\Bots\Telegram\Aula bot\bin\Debug\net6.0\PerreVergueBot.dll.config
+D:\Documentos\Trabajos\Telegram\Aula bot\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Documentos\Trabajos\Telegram\Aula bot\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+D:\Documentos\Trabajos\Telegram\Aula bot\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
