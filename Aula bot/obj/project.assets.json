@@ -500,10 +500,10 @@
           "lib/netstandard2.0/ScrapySharp.dll": {}
         }
       },
-      "Selenium.Support/4.9.1": {
+      "Selenium.Support/4.11.0": {
         "type": "package",
         "dependencies": {
-          "Selenium.WebDriver": "4.9.1"
+          "Selenium.WebDriver": "4.11.0"
         },
         "compile": {
           "lib/net6.0/WebDriver.Support.dll": {}
@@ -512,7 +512,7 @@
           "lib/net6.0/WebDriver.Support.dll": {}
         }
       },
-      "Selenium.WebDriver/4.9.1": {
+      "Selenium.WebDriver/4.11.0": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "13.0.1"
@@ -527,7 +527,7 @@
           "buildTransitive/Selenium.WebDriver.targets": {}
         }
       },
-      "Selenium.WebDriver.ChromeDriver/113.0.5672.6300": {
+      "Selenium.WebDriver.ChromeDriver/116.0.5845.9600": {
         "type": "package",
         "build": {
           "build/Selenium.WebDriver.ChromeDriver.targets": {}
@@ -1866,7 +1866,7 @@
           "lib/netstandard1.3/System.Xml.XPath.XmlDocument.dll": {}
         }
       },
-      "Telegram.BotAPI/6.7.1": {
+      "Telegram.BotAPI/6.7.2": {
         "type": "package",
         "dependencies": {
           "Newtonsoft.Json": "13.0.3",
@@ -2568,10 +2568,10 @@
         "scrapysharp.nuspec"
       ]
     },
-    "Selenium.Support/4.9.1": {
-      "sha512": "z77X5gmLkda4/3A/RsnkYwFrJ8RcwoJ+3rtypRTcvK1D+L0ahd3FKhcTPpcUKV4Ez2LcvWcBNjVUFx46vDOInw==",
+    "Selenium.Support/4.11.0": {
+      "sha512": "PR7ssrG9peQ5AqPSNvOJ846FFOX1wSv5eV3/8zvYwf0jhNx2bEprBZbtYMSWtht+HXtC5xb6atRQLlpKD+FETQ==",
       "type": "package",
-      "path": "selenium.support/4.9.1",
+      "path": "selenium.support/4.11.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2584,14 +2584,14 @@
         "lib/net6.0/WebDriver.Support.dll",
         "lib/netstandard2.0/WebDriver.Support.dll",
         "lib/netstandard2.1/WebDriver.Support.dll",
-        "selenium.support.4.9.1.nupkg.sha512",
+        "selenium.support.4.11.0.nupkg.sha512",
         "selenium.support.nuspec"
       ]
     },
-    "Selenium.WebDriver/4.9.1": {
-      "sha512": "GSBwNvJMtSGplGxkx8JLv55DxW5PTwTnRniD0q9G4PA7tcCVa3Hg/8/Jf6C3GDd+2DXWepQlBUR6GsIICHnBkw==",
+    "Selenium.WebDriver/4.11.0": {
+      "sha512": "V8o+Nvi9/3Ix12ZzMGg+fI7sfu+HrflZkMGq8Orr+j0INbfpEEyM6KR9oaaHlm0WUXcn7dTYwyWrJxYsi6eniw==",
       "type": "package",
-      "path": "selenium.webdriver/4.9.1",
+      "path": "selenium.webdriver/4.11.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2609,26 +2609,30 @@
         "manager/linux/selenium-manager",
         "manager/macos/selenium-manager",
         "manager/windows/selenium-manager.exe",
-        "selenium.webdriver.4.9.1.nupkg.sha512",
+        "selenium.webdriver.4.11.0.nupkg.sha512",
         "selenium.webdriver.nuspec"
       ]
     },
-    "Selenium.WebDriver.ChromeDriver/113.0.5672.6300": {
-      "sha512": "koLDjWwvv8fMyZhUu8ROFvaBnNcSc3FfyavEc+LKsk7AzfHEDA2xph7WwJGz3Y20mxH1zxW/q+EyKG6Z3cM7UQ==",
+    "Selenium.WebDriver.ChromeDriver/116.0.5845.9600": {
+      "sha512": "ip8MRM/uVZxn4leTky/Sa7+Yo648lPzeR98/JCtoknq9heUFw2wMUtxdg7VIeI6RisqVUZ6UyD9/+DgkExNLdg==",
       "type": "package",
-      "path": "selenium.webdriver.chromedriver/113.0.5672.6300",
+      "path": "selenium.webdriver.chromedriver/116.0.5845.9600",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "README.md",
         "build/DefinePropertiesChromeDriver.targets",
         "build/Selenium.WebDriver.ChromeDriver.targets",
+        "driver/linux64/LICENSE.chromedriver",
         "driver/linux64/chromedriver",
+        "driver/mac64/LICENSE.chromedriver",
         "driver/mac64/chromedriver",
+        "driver/mac64arm/LICENSE.chromedriver",
         "driver/mac64arm/chromedriver",
+        "driver/win32/LICENSE.chromedriver",
         "driver/win32/chromedriver.exe",
         "nupkg-icon.png",
-        "selenium.webdriver.chromedriver.113.0.5672.6300.nupkg.sha512",
+        "selenium.webdriver.chromedriver.116.0.5845.9600.nupkg.sha512",
         "selenium.webdriver.chromedriver.nuspec"
       ]
     },
@@ -6133,10 +6137,10 @@
         "system.xml.xpath.xmldocument.nuspec"
       ]
     },
-    "Telegram.BotAPI/6.7.1": {
-      "sha512": "1bWz64+OR+ZeH6rRYBetQFtDhlCctcI+DRtHrXhNj9kZR7CsV1hn0BEgxM7zqGLjdn1p+hAOWUSGAh9cA2pkRQ==",
+    "Telegram.BotAPI/6.7.2": {
+      "sha512": "A4hZ4hPNfNI8o+yfdy0+CsrwICN9b9qIs+2qD+LeNvfDCrmozmw2R/X8YyTpZcFUy4oRs1r3SRU9N+2PzbclYw==",
       "type": "package",
-      "path": "telegram.botapi/6.7.1",
+      "path": "telegram.botapi/6.7.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -6145,7 +6149,7 @@
         "lib/netstandard2.0/Telegram.BotAPI.dll",
         "lib/netstandard2.0/Telegram.BotAPI.xml",
         "packicon.png",
-        "telegram.botapi.6.7.1.nupkg.sha512",
+        "telegram.botapi.6.7.2.nupkg.sha512",
         "telegram.botapi.nuspec"
       ]
     }
@@ -6155,29 +6159,29 @@
       "Microsoft.Extensions.Options >= 7.0.1",
       "ScrappyNetStandard >= 0.1.0",
       "ScrapySharp >= 3.0.0",
-      "Selenium.Support >= 4.9.1",
-      "Selenium.WebDriver.ChromeDriver >= 113.0.5672.6300",
-      "Telegram.BotAPI >= 6.7.1"
+      "Selenium.Support >= 4.11.0",
+      "Selenium.WebDriver.ChromeDriver >= 116.0.5845.9600",
+      "Telegram.BotAPI >= 6.7.2"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\donne\\.nuget\\packages\\": {},
-    "E:\\Visual studio\\cosas\\NuGetPackages": {}
+    "C:\\Users\\donnet\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Documentos\\Trabajos\\Telegram\\Aula bot\\PerreVergueBot.csproj",
+      "projectUniqueName": "C:\\Users\\donnet\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula bot\\PerreVergueBot.csproj",
       "projectName": "PerreVergueBot",
-      "projectPath": "D:\\Documentos\\Trabajos\\Telegram\\Aula bot\\PerreVergueBot.csproj",
-      "packagesPath": "C:\\Users\\donne\\.nuget\\packages\\",
-      "outputPath": "D:\\Documentos\\Trabajos\\Telegram\\Aula bot\\obj\\",
+      "projectPath": "C:\\Users\\donnet\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula bot\\PerreVergueBot.csproj",
+      "packagesPath": "C:\\Users\\donnet\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\donnet\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula bot\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "E:\\Visual studio\\cosas\\NuGetPackages"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\donne\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\donnet\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -6186,6 +6190,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -6218,15 +6223,15 @@
           },
           "Selenium.Support": {
             "target": "Package",
-            "version": "[4.9.1, )"
+            "version": "[4.11.0, )"
           },
           "Selenium.WebDriver.ChromeDriver": {
             "target": "Package",
-            "version": "[113.0.5672.6300, )"
+            "version": "[116.0.5845.9600, )"
           },
           "Telegram.BotAPI": {
             "target": "Package",
-            "version": "[6.7.1, )"
+            "version": "[6.7.2, )"
           }
         },
         "imports": [
@@ -6245,7 +6250,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

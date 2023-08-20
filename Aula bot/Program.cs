@@ -22,6 +22,7 @@ var updates = bot.GetUpdates();
 DateTime thisDay = DateTime.Today;
 //Ciclo infinito de ante busqueda de actualizaciones ( mensajes )
 int auxiliar = 0;
+bool[] Coordinacion = new bool[100];
 Revision rev = new();
 while (true)
 {
@@ -47,123 +48,51 @@ while (true)
                         Revision_2horas.Revision_2(update.Message.Chat.Id.ToString(), bot);
                     });
                 }
-                //si el mensaje recibido viene de un administrador entra a un switch si no pasa a otro switch
-                _ = update.Message.Text switch
+                //de esta manera puedo recibir respuestas a preguntas simples
+                if (Coordinacion[0])
                 {
-                    //Casos de la carrera de LDI 5to semestre
-                    "/cmp_LDI" => Task.Run(() =>
-                                            {
-                                                bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de comparacion manual\n");
-                                                tareas_diferencias= Revision.Revision1(Rutas.path_datosOrLDI, Rutas.path_datosOrTempLDI, update.Message.Chat.Id.ToString(),bot);
-                                                if (tareas_diferencias.Length > 0)
-                                                {
-                                                    bot.SendMessage(update.Message.Chat.Id, tareas_diferencias);
-                                                }
-                                                else
-                                                {
-                                                    bot.SendMessage(update.Message.Chat.Id, "No se detecto una nueva tarea\n");
-                                                }
-                                            }),
-                    "/aula_LDI" => Task.Run(() =>
-                        {
-                            bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de la captura de los datos!\n");
-                            if (LDI != true)
-                            {
-                                lec.Aula(Rutas.path_datosOrLDI, "al263887", "Wera060102", Rutas.path_fecha_LDI, Rutas.path_tareas_LDI, update.Message.Chat.Id.ToString(),bot);
-                                LDI = true;
-                                contador[8] = contador[4];
-                            }
-                            StreamReader aiuda2 = File.OpenText(Rutas.path_datosOrLDI);
-                            if (contador[8] != 0)
-                            {
-                                bot.SendMessage(update.Message.Chat.Id, "=============================\n               Tareas detectadas               \n");
+                    switch (update.Message.Text)
+                    {
+                        case "rojo":
+                            bot.SendMessage(update.Message.Chat.Id, "excelente te gusta el rojo");
+                            Coordinacion[0] = false;
+                            break;
+                        case "azul":
+                            bot.SendMessage(update.Message.Chat.Id, "excelente te gusta el azul");
+                            Coordinacion[0] = false;
+                            break;
+                    }
 
-                                for (int i = 0; i < contador[8]; i++)
-                                {
-                                    var aj = "";
-                                    if ((aj = aiuda2.ReadLine()) != null)
-                                    {
-                                        bot.SendMessage(update.Message.Chat.Id, aj);
-                                    }
-                                }
-                                bot.SendMessage(update.Message.Chat.Id, "=============================\n");
-                                bot.SendAnimation(update.Message.Chat.Id, "https://thumbs.gfycat.com/MeaslyJaggedBrontosaurus-size_restricted.gif");
-                                aiuda2.Close();
-                            }
-                            else
-                            {
-                                aiuda2.Close();
-                                bot.SendMessage(update.Message.Chat.Id, "=============================\n              Sin tareas detectadas a descansar :3\n");
-                                bot.SendAnimation(update.Message.Chat.Id, "https://i.pinimg.com/originals/e0/03/69/e00369b162f3b91e05b2198efcf8f73f.gif");
-                            }
-                        }),
-                    "/Sucribirme_LDI" => Task.Run(() =>
-                        {
-                            StreamReader lect2 = new(Rutas.path_suscritosLDI);
-                            string susc2 = lect2.ReadToEnd();
-                            lect2.Close();
-                            StreamReader lau = new(Rutas.path_suscritos_ici2);
-                            string lak = lau.ReadToEnd();
-                            lau.Close();
-                            StreamReader iz = new(Rutas.path_suscritos);
-                            string h = iz.ReadToEnd();
-                            iz.Close();
-                            if (susc2.Contains(update.Message.Chat.Id.ToString()))
-                            {
-                                bot.SendMessage(update.Message.Chat.Id, "Ya estabas suscrito a LDI");
-                            }
-                            else if (lak.Contains(update.Message.Chat.Id.ToString()))
-                            {
-                                bot.SendMessage(update.Message.Chat.Id, "Ya estabas suscrito a ICI2");
-                            }
-                            else if (h.Contains(update.Message.Chat.Id.ToString()))
-                            {
-                                bot.SendMessage(update.Message.Chat.Id, "Ya estabas suscrito a ICI");
-                            }
-                            else
-                            {
-                                bot.SendMessage(update.Message.Chat.Id, "Listo ya estas suscrito a LDI");
-                                Revision.Suscritos(update.Message.Chat.Id.ToString(), Rutas.path_suscritosLDI);
-                            }
-                        }),
-                    //Casos de la segunda mitad de ICI 3er semestre
-                    "/cmp_ICI2" => Task.Run(() =>
-                                            {
-                                                bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de comparacion manual\n");
-                                                tareas_diferencias = Revision.Revision1(Rutas.path_datosOrICI2, Rutas.path_datosOrTempICI2, update.Message.Chat.Id.ToString(),bot);
-                                                if (tareas_diferencias.Length > 0)
-                                                {
-                                                    bot.SendMessage(update.Message.Chat.Id, tareas_diferencias);
-                                                }
-                                                else
-                                                {
-                                                    bot.SendMessage(update.Message.Chat.Id, "No se detecto una nueva tarea\n");
-                                                }
-                                            }),
-                    "/aula_ICI2" => Task.Run(() =>
-                        {
+
+                }else if (Coordinacion[1])
+                {
+                    switch (update.Message.Text)
+                    {
+                        case "/ICI":
                             bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de la captura de los datos!\n");
 
                             if (altiro != true)
                             {
-                                lec.Aula(Rutas.path_datosOrICI2, "al261731", "SPjl3490", Rutas.path_fechas_ici2, Rutas.path_tareas_ici2, update.Message.Chat.Id.ToString(), bot);
+                                lec.Aula(Rutas.path_datosOrICI2, "al283189", "Sayulita0506", Rutas.path_fechas_ici2, Rutas.path_tareas_ici2, update.Message.Chat.Id.ToString(), bot);
                                 altiro = true;
-                                contador[9] = contador[4];
+
                             }
 
                             StreamReader aiu = File.OpenText(Rutas.path_datosOrICI2);
-                            if (contador[9] != 0)
+                            if (aiu != null)
                             {
                                 bot.SendMessage(update.Message.Chat.Id, "=============================\n               Tareas detectadas               \n");
 
-                                for (int i = 0; i < contador[9]; i++)
-                                {
+                                for (int i = 0; i < LecturaAula.tareas_detectadas; i++) {
+
                                     var ak = "";
                                     if ((ak = aiu.ReadLine()) != null)
                                     {
                                         bot.SendMessage(update.Message.Chat.Id, ak);
                                     }
                                 }
+
+
                                 bot.SendMessage(update.Message.Chat.Id, "=============================\n");
                                 bot.SendAnimation(update.Message.Chat.Id, "https://thumbs.gfycat.com/MeaslyJaggedBrontosaurus-size_restricted.gif");
                                 aiu.Close();
@@ -174,9 +103,48 @@ while (true)
                                 bot.SendMessage(update.Message.Chat.Id, "=============================\n              Sin tareas detectadas a descansar :3\n");
                                 bot.SendAnimation(update.Message.Chat.Id, "https://i.pinimg.com/originals/ca/39/9e/ca399e41629b0bc8d91f8d6507b15707.gif");
                             }
-                        }),
-                    "/Suscribirme_ICI2" => Task.Run(() =>
-                        {
+
+                            Coordinacion[1] = false;
+                            LecturaAula.tareas_detectadas = 0;
+                            break;
+                        case "/LDI":
+                            bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de la captura de los datos!\n");
+                            if (LDI != true)
+                            {
+                                lec.Aula(Rutas.path_datosOrLDI, "al263887", "Wera060102", Rutas.path_fecha_LDI, Rutas.path_tareas_LDI, update.Message.Chat.Id.ToString(), bot);
+                                LDI = true;
+
+                            }
+                            StreamReader aiuda2 = File.OpenText(Rutas.path_datosOrLDI);
+
+                            bot.SendMessage(update.Message.Chat.Id, "=============================\n               Tareas detectadas               \n");
+                            if (aiuda2 != null) { 
+                            for (int i = 0; i < LecturaAula.tareas_detectadas; i++)
+                            {
+                                var aj = "";
+                                if ((aj = aiuda2.ReadLine()) != null)
+                                {
+                                    bot.SendMessage(update.Message.Chat.Id, aj);
+                                }
+                            }
+                            bot.SendMessage(update.Message.Chat.Id, "=============================\n");
+                            bot.SendAnimation(update.Message.Chat.Id, "https://thumbs.gfycat.com/MeaslyJaggedBrontosaurus-size_restricted.gif");
+                            aiuda2.Close();
+                    }
+                            else
+                            {
+                                aiuda2.Close();
+                                bot.SendMessage(update.Message.Chat.Id, "=============================\n              Sin tareas detectadas a descansar :3\n");
+                                bot.SendAnimation(update.Message.Chat.Id, "https://i.pinimg.com/originals/e0/03/69/e00369b162f3b91e05b2198efcf8f73f.gif");
+                            }
+                            Coordinacion[1] = false;
+                            break;
+                    }
+                }else if (Coordinacion[2])
+                {
+                    switch (update.Message.Text)
+                    {
+                        case "/ICI":
                             StreamReader lect = new(Rutas.path_suscritos_ici2);
                             string sus = lect.ReadToEnd();
                             lect.Close();
@@ -188,7 +156,7 @@ while (true)
                             g.Close();
                             if (sus.Contains(update.Message.Chat.Id.ToString()))
                             {
-                                bot.SendMessage(update.Message.Chat.Id, "Ya estabas suscrito en ICI2");
+                                bot.SendMessage(update.Message.Chat.Id, "Ya estabas suscrito en ICI");
 
                             }
                             else if (av.Contains(update.Message.Chat.Id.ToString()))
@@ -204,102 +172,88 @@ while (true)
                                 bot.SendMessage(update.Message.Chat.Id, "Listo ya estas suscrito en ICI2");
                                 Revision.Suscritos(update.Message.Chat.Id.ToString(), Rutas.path_suscritos_ici2);
                             }
-                        }),
-                    //casos de la carrera de ICI 1ra mitad 3er semestre
-                    "/cmp_ICI" => Task.Run(() =>
-                                            {
-                                                bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de comparacion manual\n");
-                                                tareas_diferencias = Revision.Revision1(Rutas.path_datosOr, Rutas.path_datosOrTemp, update.Message.Chat.Id.ToString(),bot);
-                                                if (tareas_diferencias.Length > 0)
-                                                {
-                                                    bot.SendMessage(update.Message.Chat.Id, tareas_diferencias);
-                                                }
-                                                else
-                                                {
-                                                    bot.SendMessage(update.Message.Chat.Id, "No se detecto una nueva tarea\n");
-                                                }
-                                            }),
-                    "/aula_ICI" => Task.Run(() =>
-                        {
-                            bot.SendMessage(update.Message.Chat.Id, "Esta en proceso de la captura de los datos!\n");
-
-                            if (veces != true)
-                            {
-                                lec.Aula(Rutas.path_datosOr, "al283189", "Sayulita0506", Rutas.path_fecha, Rutas.path_tareas, update.Message.Chat.Id.ToString(), bot);
-                                veces = true;
-                                contador[7] = contador[4];
-                            }
-                            StreamReader aiuda = File.OpenText(Rutas.path_datosOr);
-                            if (contador[7] != 0)
-                            {
-                                bot.SendMessage(update.Message.Chat.Id, "=============================\n               Tareas detectadas               \n");
-
-                                for (int i = 0; i < contador[7]; i++)
-                                {
-                                    var ag = "";
-                                    if ((ag = aiuda.ReadLine()) != null)
-                                    {
-                                        bot.SendMessage(update.Message.Chat.Id, text: ag);
-                                    }
-                                }
-                                bot.SendMessage(update.Message.Chat.Id, "=============================\n");
-                                bot.SendAnimation(update.Message.Chat.Id, "https://thumbs.gfycat.com/MeaslyJaggedBrontosaurus-size_restricted.gif");
-                                aiuda.Close();
-                            }
-                            else
-                            {
-                                aiuda.Close();
-                                bot.SendMessage(update.Message.Chat.Id, "===================================\n              Sin tareas detectadas a descansar :3\n");
-                                bot.SendAnimation(update.Message.Chat.Id, "https://i.pinimg.com/originals/b8/47/7b/b8477b8f1cf8fcb00e37fbec31c2a22e.gif");
-                            }
-                        }),
-                    "/Suscribirme_ICI" => Task.Run(() =>
-                        {
-                            StreamReader lect34 = new(Rutas.path_suscritos);
-                            string susc = lect34.ReadToEnd();
-                            lect34.Close();
-                            StreamReader o = new(Rutas.path_suscritosLDI);
-                            string j = o.ReadToEnd();
-                            o.Close();
-                            StreamReader l = new(Rutas.path_suscritos_ici2);
-                            string n = l.ReadToEnd();
-                            l.Close();
-                            if (susc.Contains(update.Message.Chat.Id.ToString()))
-                            {
-                                bot.SendMessage(update.Message.Chat.Id, "Ya estabas suscrito a ICI");
-                            }
-                            else if (j.Contains(update.Message.Chat.Id.ToString()))
+                            Coordinacion[2] = false;
+                            break;
+                        case "/LDI":
+                            StreamReader lect2 = new(Rutas.path_suscritosLDI);
+                            string susc2 = lect2.ReadToEnd();
+                            lect2.Close();
+                            StreamReader lau = new(Rutas.path_suscritos_ici2);
+                            string lak = lau.ReadToEnd();
+                            lau.Close();
+                            StreamReader iz = new(Rutas.path_suscritos);
+                            string h = iz.ReadToEnd();
+                            iz.Close();
+                            if (susc2.Contains(update.Message.Chat.Id.ToString()))
                             {
                                 bot.SendMessage(update.Message.Chat.Id, "Ya estabas suscrito a LDI");
                             }
-                            else if (n.Contains(update.Message.Chat.Id.ToString()))
+                            else if (lak.Contains(update.Message.Chat.Id.ToString()))
                             {
-                                bot.SendMessage(update.Message.Chat.Id, "Ya estabas suscrito a ICI2");
+                                bot.SendMessage(update.Message.Chat.Id, "Ya estabas suscrito a ICI");
+                            }
+                            else if (h.Contains(update.Message.Chat.Id.ToString()))
+                            {
+                                bot.SendMessage(update.Message.Chat.Id, "Ya estabas suscrito a ICI");
                             }
                             else
                             {
-                                bot.SendMessage(update.Message.Chat.Id, "Listo ya estas suscrito a ICI");
-                                Revision.Suscritos(update.Message.Chat.Id.ToString(), Rutas.path_suscritos);
+                                bot.SendMessage(update.Message.Chat.Id, "Listo ya estas suscrito a LDI");
+                                Revision.Suscritos(update.Message.Chat.Id.ToString(), Rutas.path_suscritosLDI);
                             }
-                        }),
-                    "/start" => Task.Run(() =>
+                            Coordinacion[2] = false;
+                            break;
+                    }
+                }
+                else{
+                    _ = update.Message.Text switch
+                    {
+                        "/start" => Task.Run(() =>
                         {
                             bot.SendMessage(update.Message.Chat.Id, "Hola yo soy un bot de ayuda con el recordatorio y vista de las tareas de aula virtual\nPor el momento soy una beta pero espero que con tu ayuda\nPueda mejorar para facilitarte el recordatorio de tus tareas\n Y proximamente añadir mas cosas útiles :)");
                             bot.SendAnimation(update.Message.Chat.Id, "http://68.media.tumblr.com/0c6c24139702399121af533ab6011237/tumblr_oqcj9ycnPO1w46s3lo1_540.gif");
 
                         }),
-                    //Informa de todos los comandos accesibles
-                    "/help" => Task.Run(() =>
-                                            {
-                                                bot.SendMessage(update.Message.Chat.Id, "========================\n\n/start - pequeña presentación del bot\r\n/cmp_LDI - compara manualmente las tareas de aula de la carrera de LDI\r\n/aula_LDI - consigue que tareas tienes activas para la carrera de LDI\r\n/Sucribirme_LDI - Si detecta una nueva tarea, te lo hace saber en un mensaje dandote la tarea y fecha de entrega \r\n/cmp_ICI - compara manualmente las tareas de aula de la carrera de ICI\r\n/aula_ICI - consigue que tareas tienes activas para la carrera de ICI\r\n/Suscribirme_ICI - Si detecta una nueva tarea, te lo hace saber en un mensaje dandote la tarea y fecha de entrega\r\n/cmp_ICI2 - compara manualmente las tareas de aula de la carrera de ICI\r\n/aula_ICI2 - consigue que tareas tienes activas para la carrera de ICI\r\n/Suscribirme_ICI2 - Si detecta una nueva tarea, te lo hace saber en un mensaje dandote la tarea y fecha de entrega\n\n========================\n");
-                                                bot.SendAnimation(update.Message.Chat.Id, "https://media.tenor.com/oim29qOLORkAAAAC/konosuba-dance.gif");
-                                            }),
-                    //Si lo ingresado no esta en los comandos le dice que no lo detecto
-                    _ => Task.Run(() =>
-                                            {
-                                                bot.SendMessage(update.Message.Chat.Id, "Comando no encontrado, para mas informacion escriba /help");
-                                            }),
-                };
+                        //Informa de todos los comandos accesibles
+                        "/help" => Task.Run(() =>
+                        {
+                            bot.SendMessage(update.Message.Chat.Id, "========================\n\n/start - pequeña presentación del bot\r\n/Suscribirme - Te suscribe a recibir actualizaciones cada vez que suban una nueva tarea\n/Revisar_Tareas - Revisa manualmente las tareas activas de tu carrera");
+                            bot.SendAnimation(update.Message.Chat.Id, "https://media.tenor.com/oim29qOLORkAAAAC/konosuba-dance.gif");
+                        }),
+                        "/Preguntas" => Task.Run(() =>
+                        {
+                            bot.SendMessage(update.Message.Chat.Id, "Que prefieres, rojo u azul?");
+                            Coordinacion[0] = true;
+                        }),
+                        "/Revisar_Tareas" => Task.Run(() =>
+                        {
+                            bot.SendMessage(update.Message.Chat.Id, "Porfavor dime que carera quieres revisar\n\n\t\t/ICI\n\n\t\t/LDI");
+                            Coordinacion[1] = true;
+                            
+                        }),
+                        "/Suscribirme" => Task.Run(() =>
+                        {
+                            bot.SendMessage(update.Message.Chat.Id, "Porfavor dime que carera quieres suscribirte\n\n\t\t/ICI\n\n\t\t/LDI");
+                            Coordinacion[2] = true;
+
+                        }),
+                        //Si lo ingresado no esta en los comandos le dice que no lo detecto
+                        _ => Task.Run(() =>
+                        {
+                            bot.SendMessage(update.Message.Chat.Id, "Comando no encontrado, para mas informacion escriba /help");
+                        }),
+                    }; ; ;
+                }
+
+
+
+
+
+
+
+
+                //si el mensaje recibido viene de un administrador entra a un switch si no pasa a otro switch
+               
                 //fin de los casos de comandos
                 //revisa que valla aumentando de 1 en 1 en la lectura de los mensajes (por si recibe varios mensajes)
                 try

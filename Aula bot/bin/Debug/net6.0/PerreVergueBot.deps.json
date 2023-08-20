@@ -11,9 +11,9 @@
           "Microsoft.Extensions.Options": "7.0.1",
           "ScrappyNetStandard": "0.1.0",
           "ScrapySharp": "3.0.0",
-          "Selenium.Support": "4.9.1",
-          "Selenium.WebDriver.ChromeDriver": "113.0.5672.6300",
-          "Telegram.BotAPI": "6.7.1"
+          "Selenium.Support": "4.11.0",
+          "Selenium.WebDriver.ChromeDriver": "116.0.5845.9600",
+          "Telegram.BotAPI": "6.7.2"
         },
         "runtime": {
           "PerreVergueBot.dll": {}
@@ -294,9 +294,9 @@
           }
         }
       },
-      "Selenium.Support/4.9.1": {
+      "Selenium.Support/4.11.0": {
         "dependencies": {
-          "Selenium.WebDriver": "4.9.1"
+          "Selenium.WebDriver": "4.11.0"
         },
         "runtime": {
           "lib/net6.0/WebDriver.Support.dll": {
@@ -305,7 +305,7 @@
           }
         }
       },
-      "Selenium.WebDriver/4.9.1": {
+      "Selenium.WebDriver/4.11.0": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.3"
         },
@@ -316,7 +316,7 @@
           }
         }
       },
-      "Selenium.WebDriver.ChromeDriver/113.0.5672.6300": {},
+      "Selenium.WebDriver.ChromeDriver/116.0.5845.9600": {},
       "System.AppContext/4.1.0": {
         "dependencies": {
           "System.Runtime": "4.3.0"
@@ -1071,15 +1071,15 @@
           }
         }
       },
-      "Telegram.BotAPI/6.7.1": {
+      "Telegram.BotAPI/6.7.2": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.3",
           "System.Text.Json": "7.0.2"
         },
         "runtime": {
           "lib/netstandard2.0/Telegram.BotAPI.dll": {
-            "assemblyVersion": "6.7.1.0",
-            "fileVersion": "6.7.1.0"
+            "assemblyVersion": "6.7.2.0",
+            "fileVersion": "6.7.2.0"
           }
         }
       }
@@ -1322,26 +1322,26 @@
       "path": "scrapysharp/3.0.0",
       "hashPath": "scrapysharp.3.0.0.nupkg.sha512"
     },
-    "Selenium.Support/4.9.1": {
+    "Selenium.Support/4.11.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-z77X5gmLkda4/3A/RsnkYwFrJ8RcwoJ+3rtypRTcvK1D+L0ahd3FKhcTPpcUKV4Ez2LcvWcBNjVUFx46vDOInw==",
-      "path": "selenium.support/4.9.1",
-      "hashPath": "selenium.support.4.9.1.nupkg.sha512"
+      "sha512": "sha512-PR7ssrG9peQ5AqPSNvOJ846FFOX1wSv5eV3/8zvYwf0jhNx2bEprBZbtYMSWtht+HXtC5xb6atRQLlpKD+FETQ==",
+      "path": "selenium.support/4.11.0",
+      "hashPath": "selenium.support.4.11.0.nupkg.sha512"
     },
-    "Selenium.WebDriver/4.9.1": {
+    "Selenium.WebDriver/4.11.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-GSBwNvJMtSGplGxkx8JLv55DxW5PTwTnRniD0q9G4PA7tcCVa3Hg/8/Jf6C3GDd+2DXWepQlBUR6GsIICHnBkw==",
-      "path": "selenium.webdriver/4.9.1",
-      "hashPath": "selenium.webdriver.4.9.1.nupkg.sha512"
+      "sha512": "sha512-V8o+Nvi9/3Ix12ZzMGg+fI7sfu+HrflZkMGq8Orr+j0INbfpEEyM6KR9oaaHlm0WUXcn7dTYwyWrJxYsi6eniw==",
+      "path": "selenium.webdriver/4.11.0",
+      "hashPath": "selenium.webdriver.4.11.0.nupkg.sha512"
     },
-    "Selenium.WebDriver.ChromeDriver/113.0.5672.6300": {
+    "Selenium.WebDriver.ChromeDriver/116.0.5845.9600": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-koLDjWwvv8fMyZhUu8ROFvaBnNcSc3FfyavEc+LKsk7AzfHEDA2xph7WwJGz3Y20mxH1zxW/q+EyKG6Z3cM7UQ==",
-      "path": "selenium.webdriver.chromedriver/113.0.5672.6300",
-      "hashPath": "selenium.webdriver.chromedriver.113.0.5672.6300.nupkg.sha512"
+      "sha512": "sha512-ip8MRM/uVZxn4leTky/Sa7+Yo648lPzeR98/JCtoknq9heUFw2wMUtxdg7VIeI6RisqVUZ6UyD9/+DgkExNLdg==",
+      "path": "selenium.webdriver.chromedriver/116.0.5845.9600",
+      "hashPath": "selenium.webdriver.chromedriver.116.0.5845.9600.nupkg.sha512"
     },
     "System.AppContext/4.1.0": {
       "type": "package",
@@ -1819,12 +1819,12 @@
       "path": "system.xml.xpath.xmldocument/4.3.0",
       "hashPath": "system.xml.xpath.xmldocument.4.3.0.nupkg.sha512"
     },
-    "Telegram.BotAPI/6.7.1": {
+    "Telegram.BotAPI/6.7.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1bWz64+OR+ZeH6rRYBetQFtDhlCctcI+DRtHrXhNj9kZR7CsV1hn0BEgxM7zqGLjdn1p+hAOWUSGAh9cA2pkRQ==",
-      "path": "telegram.botapi/6.7.1",
-      "hashPath": "telegram.botapi.6.7.1.nupkg.sha512"
+      "sha512": "sha512-A4hZ4hPNfNI8o+yfdy0+CsrwICN9b9qIs+2qD+LeNvfDCrmozmw2R/X8YyTpZcFUy4oRs1r3SRU9N+2PzbclYw==",
+      "path": "telegram.botapi/6.7.2",
+      "hashPath": "telegram.botapi.6.7.2.nupkg.sha512"
     }
   }
 }

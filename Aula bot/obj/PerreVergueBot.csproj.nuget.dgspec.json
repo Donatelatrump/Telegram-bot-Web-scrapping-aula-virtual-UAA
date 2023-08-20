@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Documentos\\Trabajos\\Telegram\\Aula bot\\PerreVergueBot.csproj": {}
+    "C:\\Users\\donnet\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula bot\\PerreVergueBot.csproj": {}
   },
   "projects": {
-    "D:\\Documentos\\Trabajos\\Telegram\\Aula bot\\PerreVergueBot.csproj": {
+    "C:\\Users\\donnet\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula bot\\PerreVergueBot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Documentos\\Trabajos\\Telegram\\Aula bot\\PerreVergueBot.csproj",
+        "projectUniqueName": "C:\\Users\\donnet\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula bot\\PerreVergueBot.csproj",
         "projectName": "PerreVergueBot",
-        "projectPath": "D:\\Documentos\\Trabajos\\Telegram\\Aula bot\\PerreVergueBot.csproj",
-        "packagesPath": "C:\\Users\\donne\\.nuget\\packages\\",
-        "outputPath": "D:\\Documentos\\Trabajos\\Telegram\\Aula bot\\obj\\",
+        "projectPath": "C:\\Users\\donnet\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula bot\\PerreVergueBot.csproj",
+        "packagesPath": "C:\\Users\\donnet\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\donnet\\Telegram-bot-Web-scrapping-aula-virtual-UAA\\Aula bot\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "E:\\Visual studio\\cosas\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\donne\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\donnet\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -58,15 +59,15 @@
             },
             "Selenium.Support": {
               "target": "Package",
-              "version": "[4.9.1, )"
+              "version": "[4.11.0, )"
             },
             "Selenium.WebDriver.ChromeDriver": {
               "target": "Package",
-              "version": "[113.0.5672.6300, )"
+              "version": "[116.0.5845.9600, )"
             },
             "Telegram.BotAPI": {
               "target": "Package",
-              "version": "[6.7.1, )"
+              "version": "[6.7.2, )"
             }
           },
           "imports": [
@@ -85,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }

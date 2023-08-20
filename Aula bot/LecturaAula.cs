@@ -9,17 +9,15 @@ namespace PerreVergueBot
 {
     internal class LecturaAula
     {
- 
-
-
-         
-        
+        public static int tareas_detectadas = 0;
         public  string Aula(string path, string Usuario, string Password2, string fecha1, string tarea1, string update, BotClient bot)
 
         {
+
             ChromeOptions options = new();
             options.AddArguments("--headless");
-            WebDriver driver = new ChromeDriver(options);
+            string chromeDriverPath = @"C:\Program Files\Google\Chrome\Application\chromedriver.exe";
+            IWebDriver driver = new ChromeDriver(chromeDriverPath,options);
             int auxiliar = 0, auxiliar2 = 0;
             string dia = "";
             string Fechas_aula = "";
@@ -80,6 +78,7 @@ namespace PerreVergueBot
                         {
                             string[] partes = item2.Text.Split(',');
 
+                           
                             if (partes.Length >= 3)
                             {
                                 string fecha = partes[2].Trim();
@@ -88,16 +87,18 @@ namespace PerreVergueBot
                                 if (fechaPartes.Length >= 2)
                                 {
                                     dia = fechaPartes[^2];
+                                    tareas_detectadas += Int32.Parse(Convert.ToString(item2.Text)[0].ToString()) + 1;
                                 }
                             }
 
                             if (Int32.Parse(dia) >= Int32.Parse(DateTime.Now.ToString("dd")))
                             {
                                 Fechas_aula += item2.Text + "\n";
+                               
                             }
                             else
                             {
-                                auxiliar2 = Int32.Parse(Convert.ToString(item2.Text)[0].ToString());
+                                auxiliar2 += Int32.Parse(Convert.ToString(item2.Text)[0].ToString());
                             }
                         }
                     }
@@ -116,6 +117,7 @@ namespace PerreVergueBot
                     if (auxiliar > auxiliar2)
                     {
                         dia += item.Text.ToString() + "\n";
+                     
                     }
                 }
             }
@@ -178,9 +180,7 @@ namespace PerreVergueBot
             ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", menuToggle);
             menuToggle.Click();
 
-            var salirElement = driver.FindElement(By.XPath("//span[@id='actionmenuaction-6']"));
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", salirElement);
-            salirElement.Click();
+           
 
             driver.Quit();
 

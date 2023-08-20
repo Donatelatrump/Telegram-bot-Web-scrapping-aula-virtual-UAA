@@ -19,9 +19,9 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
     <PackageReference Include="ScrappyNetStandard" Version="0.1.0" />
     <PackageReference Include="ScrapySharp" Version="3.0.0" />
-    <PackageReference Include="Selenium.Support" Version="4.9.1" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="113.0.5672.6300" />
-    <PackageReference Include="Telegram.BotAPI" Version="6.7.1" />
+    <PackageReference Include="Selenium.Support" Version="4.11.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="116.0.5845.9600" />
+    <PackageReference Include="Telegram.BotAPI" Version="6.7.2" />
   </ItemGroup>
 
 </Project>
