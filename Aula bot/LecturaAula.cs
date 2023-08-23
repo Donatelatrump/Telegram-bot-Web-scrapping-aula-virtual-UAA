@@ -10,7 +10,7 @@ namespace PerreVergueBot
     internal class LecturaAula
     {
         public static int tareas_detectadas = 0;
-        public  string Aula(string path, string Usuario, string Password2, string fecha1, string tarea1, string update, BotClient bot)
+        public  string Aula(string Usuario, string Password2, string update, BotClient bot)
 
         {
 
@@ -87,7 +87,6 @@ namespace PerreVergueBot
                                 if (fechaPartes.Length >= 2)
                                 {
                                     dia = fechaPartes[^2];
-                                    tareas_detectadas += Int32.Parse(Convert.ToString(item2.Text)[0].ToString()) + 1;
                                 }
                             }
 
@@ -124,8 +123,10 @@ namespace PerreVergueBot
 
             try
             {
-                File.WriteAllText(fecha1, Fechas_aula);
-                File.WriteAllText(tarea1, dia);
+                string[] Fechas = Fechas_aula.Split('\n');
+                JsonGeneral.RellenarFechas(Rutas.Jzon, update, Fechas);
+                string[] Tareas = dia.Split("\n");
+                JsonGeneral.RellenarTareas(Rutas.Jzon, update, Tareas);
             }
             catch (Exception Noabrio)
             {
@@ -135,57 +136,48 @@ namespace PerreVergueBot
             int[] auxi = new int[20];
             auxiliar2 = 0;
 
-            using (StreamReader Primer_evento = File.OpenText(fecha1))
-            {
-                string temporal = Primer_evento.ReadLine();
-                while (temporal != null)
+                string[] temporal = JsonGeneral.LeerFechas(Rutas.Jzon,update);
+            string[] temporal2 = JsonGeneral.LeerTareas(Rutas.Jzon,update);
+               for(int i = 0; i < temporal.Length; i++) 
                 {
-                    if (!string.IsNullOrEmpty(temporal))
+                    if (!string.IsNullOrEmpty(temporal[i]))
                     {
-                        auxi[auxiliar2] += temporal[0];
+                        auxi[auxiliar2] += temporal[i][0];
                         auxiliar2 += 1;
                     }
-                    temporal = Primer_evento.ReadLine();
                 }
-            }
+            string[] ordenado = new string[200];
 
-            using (StreamReader lolcito = File.OpenText(tarea1))
-            using (StreamReader Primer_evento = File.OpenText(fecha1))
-            using (StreamWriter aiuda = new(path))
-            {
+        
                 dia = "";
 
                 for (int i = 0; i < auxiliar2; i++)
                 {
-                    var ase = Primer_evento.ReadLine();
+                    var ase = temporal[i];
                     if (ase != null)
                     {
                         dia = ase.ToString();
                     }
-                    aiuda.WriteLine(dia);
+                    ordenado[i] = dia;
                     dia = "";
                     int integer = auxi[i] - '0';
                     for (int j = 0; j < integer; j++)
                     {
-                        var lo = lolcito.ReadLine();
+                        var lo = temporal2[j];
                         if (lo != null)
                         {
                             dia = lo;
                         }
-                        aiuda.WriteLine(dia);
+                        ordenado[j+1]=dia;
                     }
                 }
-            }
+            JsonGeneral.RellenarTareasOrdenadas(Rutas.Jzon, update, ordenado);
+            
             var menuToggle = driver.FindElement(By.Id("action-menu-toggle-0"));
             ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", menuToggle);
             menuToggle.Click();
-
-           
-
             driver.Quit();
-
-            int lineCount = File.ReadAllLines(path).Length;
-
+            tareas_detectadas = ordenado.Count(t => !string.IsNullOrWhiteSpace(t));
             return "a";
         }
 
